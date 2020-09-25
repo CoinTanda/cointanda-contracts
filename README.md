@@ -1,30 +1,18 @@
-<p align="center">
-  <a href="https://github.com/pooltogether/pooltogether--brand-assets">
-    <img src="https://github.com/pooltogether/pooltogether--brand-assets/blob/977e03604c49c63314450b5d432fe57d34747c66/logo/pooltogether-logo--purple-gradient.png?raw=true" alt="PoolTogether Brand" style="max-width:100%;" width="200">
-  </a>
-</p>
-
-<br />
-
 ## PoolTogether Prize Savings Protocol
-
-[![Coverage Status](https://coveralls.io/repos/github/pooltogether/pooltogether-pool-contracts/badge.svg?branch=version-3)](https://coveralls.io/github/pooltogether/pooltogether-pool-contracts?branch=version-3)
 
 [![built-with openzeppelin](https://img.shields.io/badge/built%20with-OpenZeppelin-3677FF)](https://docs.openzeppelin.com/)
 
-The [PoolTogether](https://www.pooltogether.com/) Prize Savings Protocol Ethereum smart contracts.
+The [Coin Tanda](https://www.cointanda.com/) Prize Savings Protocol RSK smart contracts.
 
-For an overview of the concepts and API please see the [documentation](https://docs.pooltogether.com/)
+For an overview of the concepts and API please see the [documentation](https://docs.cointanda.com/)
 
 #### Setup
 
 This project is available as an NPM package:
 
 ```bash
-$ yarn add @pooltogether/pooltogether-contracts@alpha
+$ yarn add @cointanda/cointaqnda-contracts
 ```
-
-Notice the `alpha` tag: this is important!  Otherwise you'll get the V2 code.
 
 #### Usage
 
@@ -42,7 +30,7 @@ Prize Pools and Prize Strategies are not included, as they are created using the
 For example, to pull in the CompoundPrizePoolBuilder artifact:
 
 ```javascript
-const CompoundPrizePoolBuilder = require('@pooltogether/pooltogether-contracts/deployments/rinkeby/CompoundPrizePoolBuilder.json')
+const CompoundPrizePoolBuilder = require('@cointanda/cointanda-contracts/deployments/rinkeby/CompoundPrizePoolBuilder.json')
 const {
   abi, 
   address, 
@@ -52,23 +40,17 @@ const {
 
 ###### ABIs
 
-Application Binary Interfaces for all PoolTogether contracts and related contracts are available in the `abis/` directory.
+Application Binary Interfaces for all Coin Tanda contracts and related contracts are available in the `abis/` directory.
 
 For example, to pull in the PrizePool ABI:
 
 ```javascript
-const PrizePool = require('@pooltogether/pooltogether-contracts/abis/PrizePool.json')
+const PrizePool = require('@cointanda/cointanda-contracts/abis/PrizePool.json')
 ```
 
 #### Development
 
 First clone this repository and enter the directory.
-
-Switch to the `version-3` branch:
-
-```
-$ git checkout version-3
-```
 
 Install dependencies:
 
