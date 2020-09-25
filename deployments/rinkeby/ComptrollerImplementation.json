@@ -1437,7 +1437,11 @@
         "type": "t_array(t_uint256)49_storage"
       },
       {
+<<<<<<< HEAD
         "astId": 8519,
+=======
+        "astId": 8591,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
         "label": "_reserveRateMantissa",
         "offset": 0,
@@ -1445,31 +1449,56 @@
         "type": "t_uint256"
       },
       {
+<<<<<<< HEAD
         "astId": 8523,
+=======
+        "astId": 8595,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
         "label": "volumeDrips",
         "offset": 0,
         "slot": "152",
+<<<<<<< HEAD
         "type": "t_mapping(t_address,t_struct(State)9877_storage)"
       },
       {
         "astId": 8527,
+=======
+        "type": "t_mapping(t_address,t_struct(State)9949_storage)"
+      },
+      {
+        "astId": 8599,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
         "label": "referralVolumeDrips",
         "offset": 0,
         "slot": "153",
+<<<<<<< HEAD
         "type": "t_mapping(t_address,t_struct(State)9877_storage)"
       },
       {
         "astId": 8531,
+=======
+        "type": "t_mapping(t_address,t_struct(State)9949_storage)"
+      },
+      {
+        "astId": 8603,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
         "label": "balanceDrips",
         "offset": 0,
         "slot": "154",
+<<<<<<< HEAD
         "type": "t_mapping(t_address,t_struct(State)9130_storage)"
       },
       {
         "astId": 8535,
+=======
+        "type": "t_mapping(t_address,t_struct(State)9202_storage)"
+      },
+      {
+        "astId": 8607,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
         "label": "dripTokenTotalSupply",
         "offset": 0,
@@ -1477,7 +1506,11 @@
         "type": "t_mapping(t_address,t_uint256)"
       },
       {
+<<<<<<< HEAD
         "astId": 8541,
+=======
+        "astId": 8613,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
         "label": "dripTokenBalances",
         "offset": 0,
@@ -1515,19 +1548,33 @@
         "numberOfBytes": "32",
         "value": "t_address"
       },
+<<<<<<< HEAD
       "t_mapping(t_address,t_mapping(t_address,t_struct(State)8822_storage))": {
+=======
+      "t_mapping(t_address,t_mapping(t_address,t_struct(State)8894_storage))": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => mapping(address => struct BalanceDrip.State))",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_mapping(t_address,t_struct(State)8822_storage)"
       },
       "t_mapping(t_address,t_mapping(t_address,t_struct(State)9383_storage))": {
+=======
+        "value": "t_mapping(t_address,t_struct(State)8894_storage)"
+      },
+      "t_mapping(t_address,t_mapping(t_address,t_struct(State)9455_storage))": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => mapping(address => struct VolumeDrip.State))",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_mapping(t_address,t_struct(State)9383_storage)"
+=======
+        "value": "t_mapping(t_address,t_struct(State)9455_storage)"
+>>>>>>> First commit of coin tanda
       },
       "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
         "encoding": "mapping",
@@ -1536,54 +1583,98 @@
         "numberOfBytes": "32",
         "value": "t_mapping(t_address,t_uint256)"
       },
+<<<<<<< HEAD
       "t_mapping(t_address,t_struct(Deposit)9357_storage)": {
+=======
+      "t_mapping(t_address,t_struct(Deposit)9429_storage)": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => struct VolumeDrip.Deposit)",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_struct(Deposit)9357_storage"
       },
       "t_mapping(t_address,t_struct(Mapping)17940_storage)": {
+=======
+        "value": "t_struct(Deposit)9429_storage"
+      },
+      "t_mapping(t_address,t_struct(Mapping)18006_storage)": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => struct MappedSinglyLinkedList.Mapping)",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_struct(Mapping)17940_storage"
       },
       "t_mapping(t_address,t_struct(State)8822_storage)": {
+=======
+        "value": "t_struct(Mapping)18006_storage"
+      },
+      "t_mapping(t_address,t_struct(State)8894_storage)": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => struct BalanceDrip.State)",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_struct(State)8822_storage"
       },
       "t_mapping(t_address,t_struct(State)9130_storage)": {
+=======
+        "value": "t_struct(State)8894_storage"
+      },
+      "t_mapping(t_address,t_struct(State)9202_storage)": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => struct BalanceDripManager.State)",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_struct(State)9130_storage"
       },
       "t_mapping(t_address,t_struct(State)9383_storage)": {
+=======
+        "value": "t_struct(State)9202_storage"
+      },
+      "t_mapping(t_address,t_struct(State)9455_storage)": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => struct VolumeDrip.State)",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_struct(State)9383_storage"
       },
       "t_mapping(t_address,t_struct(State)9877_storage)": {
+=======
+        "value": "t_struct(State)9455_storage"
+      },
+      "t_mapping(t_address,t_struct(State)9949_storage)": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => struct VolumeDripManager.State)",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_struct(State)9877_storage"
       },
       "t_mapping(t_address,t_struct(UserState)8809_storage)": {
+=======
+        "value": "t_struct(State)9949_storage"
+      },
+      "t_mapping(t_address,t_struct(UserState)8881_storage)": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_address",
         "label": "mapping(address => struct BalanceDrip.UserState)",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_struct(UserState)8809_storage"
+=======
+        "value": "t_struct(UserState)8881_storage"
+>>>>>>> First commit of coin tanda
       },
       "t_mapping(t_address,t_uint256)": {
         "encoding": "mapping",
@@ -1592,19 +1683,33 @@
         "numberOfBytes": "32",
         "value": "t_uint256"
       },
+<<<<<<< HEAD
       "t_mapping(t_uint32,t_struct(Period)9364_storage)": {
+=======
+      "t_mapping(t_uint32,t_struct(Period)9436_storage)": {
+>>>>>>> First commit of coin tanda
         "encoding": "mapping",
         "key": "t_uint32",
         "label": "mapping(uint32 => struct VolumeDrip.Period)",
         "numberOfBytes": "32",
+<<<<<<< HEAD
         "value": "t_struct(Period)9364_storage"
       },
       "t_struct(Deposit)9357_storage": {
+=======
+        "value": "t_struct(Period)9436_storage"
+      },
+      "t_struct(Deposit)9429_storage": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "struct VolumeDrip.Deposit",
         "members": [
           {
+<<<<<<< HEAD
             "astId": 9354,
+=======
+            "astId": 9426,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "balance",
             "offset": 0,
@@ -1612,7 +1717,11 @@
             "type": "t_uint112"
           },
           {
+<<<<<<< HEAD
             "astId": 9356,
+=======
+            "astId": 9428,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "period",
             "offset": 14,
@@ -1622,12 +1731,20 @@
         ],
         "numberOfBytes": "32"
       },
+<<<<<<< HEAD
       "t_struct(Mapping)17940_storage": {
+=======
+      "t_struct(Mapping)18006_storage": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "struct MappedSinglyLinkedList.Mapping",
         "members": [
           {
+<<<<<<< HEAD
             "astId": 17935,
+=======
+            "astId": 18001,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "count",
             "offset": 0,
@@ -1635,7 +1752,11 @@
             "type": "t_uint256"
           },
           {
+<<<<<<< HEAD
             "astId": 17939,
+=======
+            "astId": 18005,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "addressMap",
             "offset": 0,
@@ -1645,12 +1766,20 @@
         ],
         "numberOfBytes": "64"
       },
+<<<<<<< HEAD
       "t_struct(Period)9364_storage": {
+=======
+      "t_struct(Period)9436_storage": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "struct VolumeDrip.Period",
         "members": [
           {
+<<<<<<< HEAD
             "astId": 9359,
+=======
+            "astId": 9431,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "totalSupply",
             "offset": 0,
@@ -1658,7 +1787,11 @@
             "type": "t_uint112"
           },
           {
+<<<<<<< HEAD
             "astId": 9361,
+=======
+            "astId": 9433,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "dripAmount",
             "offset": 14,
@@ -1666,7 +1799,11 @@
             "type": "t_uint112"
           },
           {
+<<<<<<< HEAD
             "astId": 9363,
+=======
+            "astId": 9435,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "endTime",
             "offset": 28,
@@ -1676,12 +1813,20 @@
         ],
         "numberOfBytes": "32"
       },
+<<<<<<< HEAD
       "t_struct(State)8822_storage": {
+=======
+      "t_struct(State)8894_storage": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "struct BalanceDrip.State",
         "members": [
           {
+<<<<<<< HEAD
             "astId": 8811,
+=======
+            "astId": 8883,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "dripRatePerSecond",
             "offset": 0,
@@ -1689,7 +1834,11 @@
             "type": "t_uint256"
           },
           {
+<<<<<<< HEAD
             "astId": 8813,
+=======
+            "astId": 8885,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "exchangeRateMantissa",
             "offset": 0,
@@ -1697,7 +1846,11 @@
             "type": "t_uint112"
           },
           {
+<<<<<<< HEAD
             "astId": 8815,
+=======
+            "astId": 8887,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "totalDripped",
             "offset": 14,
@@ -1705,7 +1858,11 @@
             "type": "t_uint112"
           },
           {
+<<<<<<< HEAD
             "astId": 8817,
+=======
+            "astId": 8889,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "timestamp",
             "offset": 28,
@@ -1713,61 +1870,110 @@
             "type": "t_uint32"
           },
           {
+<<<<<<< HEAD
             "astId": 8821,
+=======
+            "astId": 8893,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "userStates",
             "offset": 0,
             "slot": "2",
+<<<<<<< HEAD
             "type": "t_mapping(t_address,t_struct(UserState)8809_storage)"
+=======
+            "type": "t_mapping(t_address,t_struct(UserState)8881_storage)"
+>>>>>>> First commit of coin tanda
           }
         ],
         "numberOfBytes": "96"
       },
+<<<<<<< HEAD
       "t_struct(State)9130_storage": {
+=======
+      "t_struct(State)9202_storage": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "struct BalanceDripManager.State",
         "members": [
           {
+<<<<<<< HEAD
             "astId": 9123,
+=======
+            "astId": 9195,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "activeBalanceDrips",
             "offset": 0,
             "slot": "0",
+<<<<<<< HEAD
             "type": "t_mapping(t_address,t_struct(Mapping)17940_storage)"
           },
           {
             "astId": 9129,
+=======
+            "type": "t_mapping(t_address,t_struct(Mapping)18006_storage)"
+          },
+          {
+            "astId": 9201,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "balanceDrips",
             "offset": 0,
             "slot": "1",
+<<<<<<< HEAD
             "type": "t_mapping(t_address,t_mapping(t_address,t_struct(State)8822_storage))"
+=======
+            "type": "t_mapping(t_address,t_mapping(t_address,t_struct(State)8894_storage))"
+>>>>>>> First commit of coin tanda
           }
         ],
         "numberOfBytes": "64"
       },
+<<<<<<< HEAD
       "t_struct(State)9383_storage": {
+=======
+      "t_struct(State)9455_storage": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "struct VolumeDrip.State",
         "members": [
           {
+<<<<<<< HEAD
             "astId": 9368,
+=======
+            "astId": 9440,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "deposits",
             "offset": 0,
             "slot": "0",
+<<<<<<< HEAD
             "type": "t_mapping(t_address,t_struct(Deposit)9357_storage)"
           },
           {
             "astId": 9372,
+=======
+            "type": "t_mapping(t_address,t_struct(Deposit)9429_storage)"
+          },
+          {
+            "astId": 9444,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "periods",
             "offset": 0,
             "slot": "1",
+<<<<<<< HEAD
             "type": "t_mapping(t_uint32,t_struct(Period)9364_storage)"
           },
           {
             "astId": 9374,
+=======
+            "type": "t_mapping(t_uint32,t_struct(Period)9436_storage)"
+          },
+          {
+            "astId": 9446,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "nextPeriodSeconds",
             "offset": 0,
@@ -1775,7 +1981,11 @@
             "type": "t_uint32"
           },
           {
+<<<<<<< HEAD
             "astId": 9376,
+=======
+            "astId": 9448,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "nextDripAmount",
             "offset": 4,
@@ -1783,7 +1993,11 @@
             "type": "t_uint112"
           },
           {
+<<<<<<< HEAD
             "astId": 9378,
+=======
+            "astId": 9450,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "__gap",
             "offset": 18,
@@ -1791,7 +2005,11 @@
             "type": "t_uint112"
           },
           {
+<<<<<<< HEAD
             "astId": 9380,
+=======
+            "astId": 9452,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "totalDripped",
             "offset": 0,
@@ -1799,7 +2017,11 @@
             "type": "t_uint112"
           },
           {
+<<<<<<< HEAD
             "astId": 9382,
+=======
+            "astId": 9454,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "periodCount",
             "offset": 14,
@@ -1809,35 +2031,62 @@
         ],
         "numberOfBytes": "128"
       },
+<<<<<<< HEAD
       "t_struct(State)9877_storage": {
+=======
+      "t_struct(State)9949_storage": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "struct VolumeDripManager.State",
         "members": [
           {
+<<<<<<< HEAD
             "astId": 9870,
+=======
+            "astId": 9942,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "activeVolumeDrips",
             "offset": 0,
             "slot": "0",
+<<<<<<< HEAD
             "type": "t_mapping(t_address,t_struct(Mapping)17940_storage)"
           },
           {
             "astId": 9876,
+=======
+            "type": "t_mapping(t_address,t_struct(Mapping)18006_storage)"
+          },
+          {
+            "astId": 9948,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "volumeDrips",
             "offset": 0,
             "slot": "1",
+<<<<<<< HEAD
             "type": "t_mapping(t_address,t_mapping(t_address,t_struct(State)9383_storage))"
+=======
+            "type": "t_mapping(t_address,t_mapping(t_address,t_struct(State)9455_storage))"
+>>>>>>> First commit of coin tanda
           }
         ],
         "numberOfBytes": "64"
       },
+<<<<<<< HEAD
       "t_struct(UserState)8809_storage": {
+=======
+      "t_struct(UserState)8881_storage": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "struct BalanceDrip.UserState",
         "members": [
           {
+<<<<<<< HEAD
             "astId": 8808,
+=======
+            "astId": 8880,
+>>>>>>> First commit of coin tanda
             "contract": "contracts/comptroller/Comptroller.sol:Comptroller",
             "label": "lastExchangeRateMantissa",
             "offset": 0,

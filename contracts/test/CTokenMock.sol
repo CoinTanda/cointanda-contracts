@@ -1,19 +1,19 @@
 /**
-Copyright 2019 PoolTogether LLC
+Copyright 2019 CoinTanda LLC
 
-This file is part of PoolTogether.
+This file is part of CoinTanda.
 
-PoolTogether is free software: you can redistribute it and/or modify
+CoinTanda is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation under version 3 of the License.
 
-PoolTogether is distributed in the hope that it will be useful,
+CoinTanda is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with PoolTogether.  If not, see <https://www.gnu.org/licenses/>.
+along with CoinTanda.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 pragma solidity >=0.6.0 <0.7.0;

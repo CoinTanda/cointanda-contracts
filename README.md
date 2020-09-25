@@ -1,22 +1,23 @@
-## PoolTogether Prize Savings Protocol
+# CoinTanda Prize Savings Protocol
+
+[![Coverage Status](https://coveralls.io/repos/github/cointanda/cointanda-contracts/badge.svg?branch=version-3)](https://coveralls.io/github/cointanda/cointanda-contracts?branch=version-3)
 
 [![built-with openzeppelin](https://img.shields.io/badge/built%20with-OpenZeppelin-3677FF)](https://docs.openzeppelin.com/)
 
-The [Coin Tanda](https://www.cointanda.com/) Prize Savings Protocol RSK smart contracts.
+The [CoinTanda](https://www.cointanda.com/) Prize Savings Protocol Rsk smart contracts.
 
-For an overview of the concepts and API please see the [documentation](https://docs.cointanda.com/)
 
-#### Setup
+# Setup
 
 This project is available as an NPM package:
 
 ```bash
-$ yarn add @cointanda/cointaqnda-contracts
+$ yarn add @cointanda/cointanda-contracts
 ```
 
-#### Usage
+# Usage
 
-###### Artifacts
+## Artifacts
 
 There are deployment artifacts available in the `deployments/` directory.  This includes:
 

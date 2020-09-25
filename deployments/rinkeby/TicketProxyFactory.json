@@ -119,16 +119,28 @@
   "storageLayout": {
     "storage": [
       {
+<<<<<<< HEAD
         "astId": 17831,
+=======
+        "astId": 17897,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/token/TicketProxyFactory.sol:TicketProxyFactory",
         "label": "instance",
         "offset": 0,
         "slot": "0",
+<<<<<<< HEAD
         "type": "t_contract(Ticket)17808"
       }
     ],
     "types": {
       "t_contract(Ticket)17808": {
+=======
+        "type": "t_contract(Ticket)17874"
+      }
+    ],
+    "types": {
+      "t_contract(Ticket)17874": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract Ticket",
         "numberOfBytes": "20"

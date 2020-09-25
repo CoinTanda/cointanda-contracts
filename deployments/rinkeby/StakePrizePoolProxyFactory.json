@@ -119,16 +119,28 @@
   "storageLayout": {
     "storage": [
       {
+<<<<<<< HEAD
         "astId": 13229,
+=======
+        "astId": 13301,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/prize-pool/stake/StakePrizePoolProxyFactory.sol:StakePrizePoolProxyFactory",
         "label": "instance",
         "offset": 0,
         "slot": "0",
+<<<<<<< HEAD
         "type": "t_contract(StakePrizePool)13219"
       }
     ],
     "types": {
       "t_contract(StakePrizePool)13219": {
+=======
+        "type": "t_contract(StakePrizePool)13291"
+      }
+    ],
+    "types": {
+      "t_contract(StakePrizePool)13291": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract StakePrizePool",
         "numberOfBytes": "20"

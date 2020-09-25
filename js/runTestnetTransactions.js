@@ -116,7 +116,11 @@ async function main() {
   // Run with CLI flag --silent to suppress log output
 
   console.log("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+<<<<<<< HEAD
   console.log("PoolTogether Pool Contracts - Testnet Transactions Script")
+=======
+  console.log("CoinTanda Pool Contracts - Testnet Transactions Script")
+>>>>>>> First commit of coin tanda
   console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
   const { getNamedAccounts, getChainId, ethers } = buidler

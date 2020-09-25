@@ -282,31 +282,56 @@
   "storageLayout": {
     "storage": [
       {
+<<<<<<< HEAD
         "astId": 6175,
+=======
+        "astId": 6239,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/builders/StakePrizePoolBuilder.sol:StakePrizePoolBuilder",
         "label": "comptroller",
         "offset": 0,
         "slot": "0",
+<<<<<<< HEAD
         "type": "t_contract(ComptrollerInterface)8510"
       },
       {
         "astId": 6177,
+=======
+        "type": "t_contract(ComptrollerInterface)8582"
+      },
+      {
+        "astId": 6241,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/builders/StakePrizePoolBuilder.sol:StakePrizePoolBuilder",
         "label": "stakePrizePoolProxyFactory",
         "offset": 0,
         "slot": "1",
+<<<<<<< HEAD
         "type": "t_contract(StakePrizePoolProxyFactory)13258"
       },
       {
         "astId": 6179,
+=======
+        "type": "t_contract(StakePrizePoolProxyFactory)13330"
+      },
+      {
+        "astId": 6243,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/builders/StakePrizePoolBuilder.sol:StakePrizePoolBuilder",
         "label": "singleRandomWinnerBuilder",
         "offset": 0,
         "slot": "2",
+<<<<<<< HEAD
         "type": "t_contract(SingleRandomWinnerBuilder)6151"
       },
       {
         "astId": 6181,
+=======
+        "type": "t_contract(SingleRandomWinnerBuilder)6207"
+      },
+      {
+        "astId": 6245,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/builders/StakePrizePoolBuilder.sol:StakePrizePoolBuilder",
         "label": "trustedForwarder",
         "offset": 0,
@@ -320,17 +345,29 @@
         "label": "address",
         "numberOfBytes": "20"
       },
+<<<<<<< HEAD
       "t_contract(ComptrollerInterface)8510": {
+=======
+      "t_contract(ComptrollerInterface)8582": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract ComptrollerInterface",
         "numberOfBytes": "20"
       },
+<<<<<<< HEAD
       "t_contract(SingleRandomWinnerBuilder)6151": {
+=======
+      "t_contract(SingleRandomWinnerBuilder)6207": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract SingleRandomWinnerBuilder",
         "numberOfBytes": "20"
       },
+<<<<<<< HEAD
       "t_contract(StakePrizePoolProxyFactory)13258": {
+=======
+      "t_contract(StakePrizePoolProxyFactory)13330": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract StakePrizePoolProxyFactory",
         "numberOfBytes": "20"
@@ -339,17 +376,29 @@
   },
   "gasEstimates": {
     "creation": {
+<<<<<<< HEAD
       "codeDepositCost": "673000",
+=======
+      "codeDepositCost": "682200",
+>>>>>>> First commit of coin tanda
       "executionCost": "infinite",
       "totalCost": "infinite"
     },
     "external": {
       "comptroller()": "1092",
+<<<<<<< HEAD
       "createSingleRandomWinner((address,uint256,uint256),(address,uint256,uint256,string,string,string,string,uint256,uint256,address[]),uint8)": "infinite",
       "createStakePrizePool((address,uint256,uint256),address)": "infinite",
       "singleRandomWinnerBuilder()": "1136",
       "stakePrizePoolProxyFactory()": "1048",
       "trustedForwarder()": "1114"
+=======
+      "createSingleRandomWinner((address,uint256,uint256),(address,address,uint256,uint256,string,string,string,string,uint256,uint256,address[]),uint8)": "infinite",
+      "createStakePrizePool((address,uint256,uint256),address)": "infinite",
+      "singleRandomWinnerBuilder()": "1158",
+      "stakePrizePoolProxyFactory()": "1048",
+      "trustedForwarder()": "1136"
+>>>>>>> First commit of coin tanda
     }
   }
 }

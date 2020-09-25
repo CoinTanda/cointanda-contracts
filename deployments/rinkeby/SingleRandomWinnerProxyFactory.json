@@ -103,16 +103,28 @@
   "storageLayout": {
     "storage": [
       {
+<<<<<<< HEAD
         "astId": 15000,
+=======
+        "astId": 15022,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/prize-strategy/single-random-winner/SingleRandomWinnerProxyFactory.sol:SingleRandomWinnerProxyFactory",
         "label": "instance",
         "offset": 0,
         "slot": "0",
+<<<<<<< HEAD
         "type": "t_contract(SingleRandomWinner)14992"
       }
     ],
     "types": {
       "t_contract(SingleRandomWinner)14992": {
+=======
+        "type": "t_contract(SingleRandomWinner)15014"
+      }
+    ],
+    "types": {
+      "t_contract(SingleRandomWinner)15014": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract SingleRandomWinner",
         "numberOfBytes": "20"

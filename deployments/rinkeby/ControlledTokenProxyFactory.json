@@ -119,16 +119,28 @@
   "storageLayout": {
     "storage": [
       {
+<<<<<<< HEAD
         "astId": 17562,
+=======
+        "astId": 17628,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/token/ControlledTokenProxyFactory.sol:ControlledTokenProxyFactory",
         "label": "instance",
         "offset": 0,
         "slot": "0",
+<<<<<<< HEAD
         "type": "t_contract(ControlledToken)17552"
       }
     ],
     "types": {
       "t_contract(ControlledToken)17552": {
+=======
+        "type": "t_contract(ControlledToken)17618"
+      }
+    ],
+    "types": {
+      "t_contract(ControlledToken)17618": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract ControlledToken",
         "numberOfBytes": "20"

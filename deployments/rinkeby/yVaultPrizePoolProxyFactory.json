@@ -119,16 +119,28 @@
   "storageLayout": {
     "storage": [
       {
+<<<<<<< HEAD
         "astId": 13680,
+=======
+        "astId": 13752,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/prize-pool/yearn/yVaultPrizePoolProxyFactory.sol:yVaultPrizePoolProxyFactory",
         "label": "instance",
         "offset": 0,
         "slot": "0",
+<<<<<<< HEAD
         "type": "t_contract(yVaultPrizePool)13670"
       }
     ],
     "types": {
       "t_contract(yVaultPrizePool)13670": {
+=======
+        "type": "t_contract(yVaultPrizePool)13742"
+      }
+    ],
+    "types": {
+      "t_contract(yVaultPrizePool)13742": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract yVaultPrizePool",
         "numberOfBytes": "20"

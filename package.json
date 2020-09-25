@@ -1,7 +1,7 @@
 {
   "name": "@cointanda/cointanda-contracts",
-  "version": "3.0.0-alpha.39",
-  "description": "PoolManager Prize Linked Savings Account Pool Smart Contracts",
+  "version": "1.0.0",
+  "description": "A Social Saving platform, based on Cryptocoins and Blockchain Technology",
   "main": "index.js",
   "bin": {
     "pt-cli": "./scripts/cli.js"

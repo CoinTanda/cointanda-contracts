@@ -119,16 +119,28 @@
   "storageLayout": {
     "storage": [
       {
+<<<<<<< HEAD
         "astId": 13073,
+=======
+        "astId": 13145,
+>>>>>>> First commit of coin tanda
         "contract": "contracts/prize-pool/compound/CompoundPrizePoolProxyFactory.sol:CompoundPrizePoolProxyFactory",
         "label": "instance",
         "offset": 0,
         "slot": "0",
+<<<<<<< HEAD
         "type": "t_contract(CompoundPrizePool)13063"
       }
     ],
     "types": {
       "t_contract(CompoundPrizePool)13063": {
+=======
+        "type": "t_contract(CompoundPrizePool)13135"
+      }
+    ],
+    "types": {
+      "t_contract(CompoundPrizePool)13135": {
+>>>>>>> First commit of coin tanda
         "encoding": "inplace",
         "label": "contract CompoundPrizePool",
         "numberOfBytes": "20"

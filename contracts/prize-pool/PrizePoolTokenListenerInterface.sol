@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: GPL-3.0
-
 pragma solidity >=0.5.0 <0.7.0;
 
 /// @title An interface that allows a contract to listen to token mint, transfer and burn events.
