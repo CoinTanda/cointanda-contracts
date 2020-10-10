@@ -4,6 +4,7 @@ const UInt256ArrayExposed = require('../build/UInt256ArrayExposed.json')
 const { ethers } = require('ethers')
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
+const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
 
 const debug = require('debug')('ptv3:UInt256ArrayExposed.test')
 
@@ -14,14 +15,14 @@ describe('UInt256ArrayExposed', function() {
   let array
 
   beforeEach(async () => {
-    [wallet, wallet2, wallet3, wallet4] = await buidler.ethers.getSigners()    
+    [wallet, wallet2, wallet3, wallet4] = await buidler.ethers.getSigners()
   })
 
   describe('remove()', () => {
     it('should error when index is out of range', async () => {
       array = await deployContract(wallet, UInt256ArrayExposed, [[1, 2, 3, 4]], overrides)
 
-      await expect(array.remove(5)).to.be.revertedWith("UInt256Array/unknown-index")
+      await revertedWith(array.callStatic.remove(5), "UInt256Array/unknown-index")
     })
 
     it('should work', async () => {

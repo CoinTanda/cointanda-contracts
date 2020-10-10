@@ -12,6 +12,7 @@ const { ethers } = require('ethers')
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
 const { call } = require('./helpers/call')
+const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
 const { AddressZero } = require('ethers').constants
 
 const toWei = ethers.utils.parseEther
@@ -108,8 +109,7 @@ describe('PrizePool', function() {
 
     describe("beforeTokenTransfer()", () => {
       it('should not allow uncontrolled tokens to call', async () => {
-        await expect(prizePool.beforeTokenTransfer(wallet._address, wallet2._address, toWei('1')))
-          .to.be.revertedWith('PrizePool/unknown-token')
+        await revertedWith(prizePool.callStatic.beforeTokenTransfer(wallet._address, wallet2._address, toWei('1')), 'PrizePool/unknown-token')
       })
 
       it('should allow controlled tokens to call', async () => {
@@ -165,17 +165,17 @@ describe('PrizePool', function() {
         debug('testing initialization of secondary prizeStrategy...')
 
         initArgs = _initArgs.slice(); initArgs[0] = AddressZero
-        await expect(prizePool2.initializeAll(...initArgs)).to.be.revertedWith('PrizePool/forwarder-not-zero')
+        await revertedWith(prizePool2.callStatic.initializeAll(...initArgs), 'PrizePool/forwarder-not-zero')
 
         initArgs = _initArgs.slice(); initArgs[1] = AddressZero
-        await expect(prizePool2.initializeAll(...initArgs)).to.be.revertedWith('PrizePool/prizeStrategy-not-zero')
+        await revertedWith(prizePool2.callStatic.initializeAll(...initArgs), 'PrizePool/prizeStrategy-not-zero')
 
         initArgs = _initArgs.slice(); initArgs[2] = AddressZero
-        await expect(prizePool2.initializeAll(...initArgs)).to.be.revertedWith('PrizePool/comptroller-not-zero')
+        await revertedWith(prizePool2.callStatic.initializeAll(...initArgs), 'PrizePool/comptroller-not-zero')
 
         initArgs = _initArgs.slice()
         await ticket.mock.controller.returns(AddressZero)
-        await expect(prizePool2.initializeAll(...initArgs)).to.be.revertedWith('PrizePool/token-ctrlr-mismatch')
+        await revertedWith(prizePool2.callStatic.initializeAll(...initArgs), 'PrizePool/token-ctrlr-mismatch')
       })
     })
 
@@ -208,8 +208,7 @@ describe('PrizePool', function() {
         await ticket.mock.totalSupply.returns(liquidityCap)
         await prizePool.setLiquidityCap(liquidityCap)
 
-        await expect(prizePool.depositTo(wallet2._address, amount, ticket.address, AddressZero))
-          .to.be.revertedWith("PrizePool/exceeds-liquidity-cap")
+        await revertedWith(prizePool.callStatic.depositTo(wallet2._address, amount, ticket.address, AddressZero), "PrizePool/exceeds-liquidity-cap")
       })
     })
 
@@ -221,8 +220,7 @@ describe('PrizePool', function() {
         await ticket.mock.totalSupply.returns(liquidityCap)
         await prizePool.setLiquidityCap(liquidityCap)
 
-        await expect(prizePool.timelockDepositTo(wallet2._address, amount, ticket.address))
-          .to.be.revertedWith("PrizePool/exceeds-liquidity-cap")
+        await revertedWith(prizePool.callStatic.timelockDepositTo(wallet2._address, amount, ticket.address), "PrizePool/exceeds-liquidity-cap")
       })
     })
 
@@ -394,8 +392,7 @@ describe('PrizePool', function() {
         await erc20token.mock.transfer.withArgs(wallet._address, toWei('10')).returns(true)
         await comptroller.mock.beforeTokenTransfer.withArgs(wallet._address, AddressZero, amount, ticket.address).returns()
 
-        await expect(prizePool.withdrawInstantlyFrom(wallet._address, amount, ticket.address, toWei('0.3')))
-          .to.be.revertedWith('PrizePool/exit-fee-exceeds-user-maximum')
+        await revertedWith(prizePool.callStatic.withdrawInstantlyFrom(wallet._address, amount, ticket.address, toWei('0.3')), 'PrizePool/exit-fee-exceeds-user-maximum')
       })
 
       it('should limit the size of the fee', async () => {
@@ -445,8 +442,7 @@ describe('PrizePool', function() {
         await erc20token.mock.transfer.withArgs(wallet._address, toWei('10')).returns(true)
         await comptroller.mock.beforeTokenTransfer.withArgs(wallet._address, AddressZero, amount, ticket.address).returns()
 
-        await expect(prizePool.withdrawInstantlyFrom(wallet._address, amount, ticket.address, toWei('0.3')))
-          .to.be.revertedWith('PrizePool/exit-fee-exceeds-user-maximum')
+        await revertedWith(prizePool.callStatic.withdrawInstantlyFrom(wallet._address, amount, ticket.address, toWei('0.3')), 'PrizePool/exit-fee-exceeds-user-maximum')
       })
 
       it('should not allow the prize-strategy to set exit fees exceeding the max', async () => {
@@ -465,8 +461,7 @@ describe('PrizePool', function() {
         // PrizeStrategy exit fee: 100.0
         // PrizePool max exit fee: 5.5  (should be capped at this)
         // User max exit fee:      5.6
-        await expect(prizePool.withdrawInstantlyFrom(wallet._address, amount, ticket.address, toWei('5.6')))
-          .to.not.be.revertedWith('PrizePool/exit-fee-exceeds-user-maximum')
+        await notRevertedWith(prizePool.callStatic.withdrawInstantlyFrom(wallet._address, amount, ticket.address, toWei('5.6')), 'PrizePool/exit-fee-exceeds-user-maximum')
       })
     })
 
@@ -706,13 +701,11 @@ describe('PrizePool', function() {
 
       it('should not allow adding uncontrolled tokens', async () => {
         await newToken.mock.controller.returns(newToken.address)
-        await expect(prizePool.addControlledToken(newToken.address))
-          .to.be.revertedWith('PrizePool/token-ctrlr-mismatch')
+        await revertedWith(prizePool.callStatic.addControlledToken(newToken.address), 'PrizePool/token-ctrlr-mismatch')
       })
 
       it('should not allow anyone else to call', async () => {
-        await expect(prizePool.connect(wallet2).addControlledToken(newToken.address))
-          .to.be.revertedWith('Ownable: caller is not the owner')
+        await revertedWith(prizePool.connect(wallet2).callStatic.addControlledToken(newToken.address), 'Ownable: caller is not the owner')
       })
     })
 
@@ -725,7 +718,7 @@ describe('PrizePool', function() {
       })
 
       it('should not allow anyone else to change the prize strategy', async () => {
-        await expect(prizePool.connect(wallet2).setPrizeStrategy(wallet2._address)).to.be.revertedWith("Ownable: caller is not the owner")
+        await revertedWith(prizePool.connect(wallet2).callStatic.setPrizeStrategy(wallet2._address), "Ownable: caller is not the owner")
       })
     })
 
@@ -738,7 +731,7 @@ describe('PrizePool', function() {
 
       it('should not allow anyone else to call', async () => {
         prizePool2 = prizePool.connect(wallet2)
-        await expect(prizePool2.emergencyShutdown()).to.be.revertedWith('Ownable: caller is not the owner')
+        await revertedWith(prizePool2.callStatic.emergencyShutdown(), 'Ownable: caller is not the owner')
       })
     })
 
@@ -756,7 +749,7 @@ describe('PrizePool', function() {
 
       it('should not allow anyone else to call', async () => {
         prizePool2 = prizePool.connect(wallet2)
-        await expect(prizePool2.setLiquidityCap(toWei('1000'))).to.be.revertedWith('Ownable: caller is not the owner')
+        await revertedWith(prizePool2.callStatic.setLiquidityCap(toWei('1000')), 'Ownable: caller is not the owner')
       })
     })
   })
@@ -821,8 +814,7 @@ describe('PrizePool', function() {
     it('should only allow the prizeStrategy to award external ERC20s', async () => {
       await yieldSourceStub.mock.canAwardExternal.withArgs(erc20token.address).returns(true)
       let prizePool2 = prizePool.connect(wallet2)
-      await expect(prizePool2.awardExternalERC20(wallet._address, FORWARDER, toWei('10')))
-        .to.be.revertedWith('PrizePool/only-prizeStrategy')
+      await revertedWith(prizePool2.callStatic.awardExternalERC20(wallet._address, FORWARDER, toWei('10')), 'PrizePool/only-prizeStrategy')
     })
 
     it('should allow arbitrary tokens to be transferred', async () => {
@@ -857,8 +849,7 @@ describe('PrizePool', function() {
     it('should only allow the prizeStrategy to award external ERC721s', async () => {
       await yieldSourceStub.mock.canAwardExternal.withArgs(erc721token.address).returns(true)
       let prizePool2 = prizePool.connect(wallet2)
-      await expect(prizePool2.awardExternalERC721(wallet._address, erc721token.address, [NFT_TOKEN_ID]))
-        .to.be.revertedWith('PrizePool/only-prizeStrategy')
+      await revertedWith(prizePool2.callStatic.awardExternalERC721(wallet._address, erc721token.address, [NFT_TOKEN_ID]), 'PrizePool/only-prizeStrategy')
     })
 
     it('should allow arbitrary tokens to be transferred', async () => {
@@ -900,16 +891,14 @@ describe('PrizePool', function() {
     describe('depositTo()', () => {
       it('should NOT mint tokens to the user', async () => {
         await ticket2.mock.totalSupply.returns('10')
-        await expect(shutdownPrizePool.depositTo(wallet2._address, toWei('1'), ticket2.address, AddressZero))
-          .to.be.revertedWith('PrizePool/shutdown')
+        await revertedWith(shutdownPrizePool.callStatic.depositTo(wallet2._address, toWei('1'), ticket2.address, AddressZero), 'PrizePool/shutdown')
       })
     })
 
     describe('timelockDepositTo()', () => {
       it('should NOT mint tokens to the user', async () => {
         await ticket2.mock.totalSupply.returns('10')
-        await expect(shutdownPrizePool.timelockDepositTo(wallet2._address, toWei('1'), ticket2.address, []))
-          .to.be.revertedWith('PrizePool/shutdown')
+        await revertedWith(shutdownPrizePool.callStatic.timelockDepositTo(wallet2._address, toWei('1'), ticket2.address, []), 'PrizePool/shutdown')
       })
     })
 

@@ -351,10 +351,6 @@ function PoolEnv() {
     debug('award completed')
   }
 
-  this.expectRevertWith = async function (promise, msg) {
-    await expect(promise).to.be.revertedWith(msg)
-  }
-
   this.awardPrize = async function () {
     await this.awardPrizeToToken({ token: 0 })
   }

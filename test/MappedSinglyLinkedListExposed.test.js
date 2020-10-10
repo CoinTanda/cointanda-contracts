@@ -4,6 +4,7 @@ const MappedSinglyLinkedListExposed = require('../build/MappedSinglyLinkedListEx
 const { ethers } = require('ethers')
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
+const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
 const { AddressZero } = require('ethers').constants
 
 const toWei = ethers.utils.parseEther
@@ -32,7 +33,7 @@ describe('MappedSinglyLinkedListExposed', function() {
     })
 
     it('should not be initialized after it contains values', async () => {
-      await expect(list.initialize()).to.be.revertedWith('Already init')
+      await revertedWith(list.callStatic.initialize(), 'Already init')
     })
   })
 
@@ -44,11 +45,11 @@ describe('MappedSinglyLinkedListExposed', function() {
 
   describe('addAddress', () => {
     it('should not allow adding the SENTINEL address', async () => {
-      await expect(list.addAddress(SENTINEL)).to.be.revertedWith("Invalid address")
+      await revertedWith(list.callStatic.addAddress(SENTINEL), "Invalid address")
     })
 
     it('should not allow adding a zero address', async () => {
-      await expect(list.addAddress(AddressZero)).to.be.revertedWith("Invalid address")
+      await revertedWith(list.callStatic.addAddress(AddressZero), "Invalid address")
     })
 
     it('should allow the user to add an address', async () => {
@@ -60,15 +61,15 @@ describe('MappedSinglyLinkedListExposed', function() {
 
   describe('removeAddress', () => {
     it('should not allow removing the SENTINEL address', async () => {
-      await expect(list.removeAddress(SENTINEL, SENTINEL)).to.be.revertedWith("Invalid address")
+      await revertedWith(list.callStatic.removeAddress(SENTINEL, SENTINEL), "Invalid address")
     })
 
     it('should not allow removing an address that does not exist', async () => {
-      await expect(list.removeAddress(wallet._address, wallet2._address)).to.be.revertedWith("Invalid prevAddress")
+      await revertedWith(list.callStatic.removeAddress(wallet._address, wallet2._address), "Invalid prevAddress")
     })
 
     it('should not allow removing a zero address', async () => {
-      await expect(list.removeAddress(wallet._address, AddressZero)).to.be.revertedWith("Invalid address")
+      await revertedWith(list.callStatic.removeAddress(wallet._address, AddressZero), "Invalid address")
     })
 
     it('should allow the user to add an address', async () => {

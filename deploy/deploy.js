@@ -12,12 +12,19 @@ const chainName = (chainId) => {
     case 4: return 'Rinkeby';
     case 5: return 'Goerli';
     case 42: return 'Kovan';
+    case 30: return 'RskMainnet';
+    case 31: return 'RskTestnet';
+    case 33: return 'RskRegtest';
     case 31337: return 'BuidlerEVM';
     default: return 'Unknown';
   }
 }
 
 module.exports = async (buidler) => {
+  const format = buidler.ethers.provider.formatter.formats
+  format.receipt['root'] = format.receipt['logsBloom']
+  Object.assign(buidler.ethers.provider.formatter, { format: format })
+
   const { getNamedAccounts, deployments, getChainId, ethers } = buidler
   const { deploy, getOrNull, save } = deployments
 
@@ -32,12 +39,12 @@ module.exports = async (buidler) => {
   const chainId = parseInt(await getChainId(), 10)
   const isLocal = [1, 3, 4, 42].indexOf(chainId) == -1
   // 31337 is unit testing, 1337 is for coverage
-  const isTestEnvironment = chainId === 31337 || chainId === 1337
+  const isTestEnvironment = chainId === 31337 || chainId === 1337 || chainId === 33
   let usingSignerAsAdmin = false
   const signer = await ethers.provider.getSigner(deployer)
 
   debug("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-  debug("PoolTogether Pool Contracts - Deploy Script")
+  debug("Coin Tanda Contracts - Deploy Script")
   debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
   const locus = isLocal ? 'local' : 'remote'
