@@ -41,7 +41,6 @@ module.exports = async (buidler) => {
   debug('isTestEnvironment', isTestEnvironment);
   // Fix transaction format  error from etherjs getTransactionReceipt as transactionReceipt format
   // checks root to be a 32 bytes hash when on RSK its 0x01
-  debug('ethers.provider', ethers.provider);
   const format = ethers.provider.formatter.formats
   if (format) format.receipt['root'] = format.receipt['logsBloom']
   Object.assign(ethers.provider.formatter, { format: format })
@@ -49,7 +48,7 @@ module.exports = async (buidler) => {
   const signer = await ethers.provider.getSigner(deployer)
 
   debug("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-  debug("PoolTogether Pool Contracts - Deploy Script")
+  debug("Coin Tanda Contracts - Deploy Script")
   debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
   const locus = isLocal ? 'local' : 'remote'

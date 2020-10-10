@@ -4,6 +4,7 @@ const ExtendedSafeCastExposed = require('../build/ExtendedSafeCastExposed.json')
 const { ethers } = require('ethers')
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
+const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 
@@ -30,7 +31,7 @@ describe('ExtendedSafeCastExposed', function() {
     })
 
     it('should throw on overflow', async () => {
-      await expect(cast.toUint112(MAX_112)).to.be.revertedWith("SafeCast: value doesn't fit in an uint112")
+      await revertedWith(cast.callStatic.toUint112(MAX_112), "SafeCast: value doesn't fit in an uint112")
     })
   })
 
@@ -40,7 +41,7 @@ describe('ExtendedSafeCastExposed', function() {
     })
 
     it('should throw on overflow', async () => {
-      await expect(cast.toUint96(MAX_96)).to.be.revertedWith("SafeCast: value doesn't fit in an uint96")
+      await revertedWith(cast.callStatic.toUint96(MAX_96), "SafeCast: value doesn't fit in an uint96")
     })
   })
 

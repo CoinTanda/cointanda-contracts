@@ -6,6 +6,7 @@ const IERC20 = require('../build/IERC20.json')
 const { ethers } = require('ethers')
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
+const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
 const { AddressZero } = require('ethers').constants
 
 const toWei = ethers.utils.parseEther
@@ -63,7 +64,7 @@ describe('VolumeDripManagerExposed', function() {
 
     it('should not allow a drip to be re-activated', async () => {
       await manager.activate(measure.address, drip1.address, periodSeconds, dripAmount, 30)
-      await expect(manager.activate(measure.address, drip1.address, periodSeconds, dripAmount, 30)).to.be.revertedWith("VolumeDripManager/drip-active")
+      await revertedWith(manager.callStatic.activate(measure.address, drip1.address, periodSeconds, dripAmount, 30), "VolumeDripManager/drip-active")
     })
   })
 
@@ -95,7 +96,7 @@ describe('VolumeDripManagerExposed', function() {
     })
 
     it('should revert for inactive drips', async () => {
-      await expect(manager.set(measure.address, drip1.address, periodSeconds, dripAmount)).to.be.revertedWith("VolumeDripManager/drip-not-active")
+      await revertedWith(manager.callStatic.set(measure.address, drip1.address, periodSeconds, dripAmount), "VolumeDripManager/drip-not-active")
     })
   })
 

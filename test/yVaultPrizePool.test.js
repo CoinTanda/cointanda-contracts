@@ -9,6 +9,7 @@ const ERC20Mintable = require('../build/ERC20Mintable.json')
 const { ethers } = require('ethers')
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
+const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 
@@ -114,7 +115,7 @@ describe('yVaultPrizePool', function() {
     })
 
     it('should revert if reserve is exceeded', async () => {
-      await expect(prizePool.redeem(amount)).to.be.revertedWith("yVaultPrizePool/insuff-liquidity")
+      await revertedWith(prizePool.callStatic.redeem(amount), "yVaultPrizePool/insuff-liquidity")
     })
 
     it('should allow a user to withdraw', async () => {

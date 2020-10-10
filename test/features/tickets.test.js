@@ -39,9 +39,19 @@ describe('Tickets Feature', () => {
     await env.buyTickets({ user: 2, tickets: 100 })
     await env.startAward()
 
-    await env.expectRevertWith(env.buyTickets({ user: 1, tickets: 100 }), "PeriodicPrizeStrategy/rng-in-flight")
+    try {
+      await env.callStatic.buyTickets({ user: 1, tickets: 100 })
+      assert.fail('transaction not reverted');
+    } catch (err) {
+      expect(err.message).to.include('PeriodicPrizeStrategy/rng-in-flight')
+    }
 
-    await env.expectRevertWith(env.transferTickets({ user: 2, tickets: 100, to: 3 }), "PeriodicPrizeStrategy/rng-in-flight")
+    try {
+      await env.callStatic.transferTickets({ user: 2, tickets: 100, to: 3 })
+      assert.fail('transaction not reverted');
+    } catch (err) {
+      expect(err.message).to.include('PeriodicPrizeStrategy/rng-in-flight')
+    }
 
     await env.completeAward({ token: 0 })
 

@@ -6,6 +6,7 @@ const { deployContract } = require('ethereum-waffle')
 const { deployMockContract } = require('./helpers/deployMockContract')
 const { AddressZero } = require("ethers").constants
 const { call } = require('./helpers/call')
+const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 
@@ -62,7 +63,7 @@ describe('Comptroller', () => {
     })
 
     it('should allow only the owner to add drips', async () => {
-      await expect(comptroller2.activateBalanceDrip(prizePoolAddress, measure.address, dripToken.address, toWei('0.001'))).to.be.revertedWith("Ownable: caller is not the owner")
+      await revertedWith(comptroller2.callStatic.activateBalanceDrip(prizePoolAddress, measure.address, dripToken.address, toWei('0.001')), "Ownable: caller is not the owner")
     })
   })
 
@@ -83,7 +84,7 @@ describe('Comptroller', () => {
     })
 
     it('should allow only the owner to remove drips', async () => {
-      await expect(comptroller2.deactivateBalanceDrip(prizePoolAddress, measure.address, dripToken.address, SENTINEL)).to.be.revertedWith("Ownable: caller is not the owner")
+      await revertedWith(comptroller2.callStatic.deactivateBalanceDrip(prizePoolAddress, measure.address, dripToken.address, SENTINEL), "Ownable: caller is not the owner")
     })
   })
 
@@ -113,7 +114,7 @@ describe('Comptroller', () => {
     })
 
     it('should not allow anyone else to update the drip rate', async () => {
-      await expect(comptroller2.setBalanceDripRate(wallet._address, measure.address, dripToken.address, toWei('0.1'))).to.be.revertedWith('Ownable: caller is not the owner')
+      await revertedWith(comptroller2.callStatic.setBalanceDripRate(wallet._address, measure.address, dripToken.address, toWei('0.1')), 'Ownable: caller is not the owner')
     })
   })
 
@@ -235,8 +236,8 @@ describe('Comptroller', () => {
     })
 
     it('should not allow anyone else', async () => {
-      await expect(
-        comptroller2.activateVolumeDrip(
+      await revertedWith(
+        comptroller2.callStatic.activateVolumeDrip(
           prizePoolAddress,
           measure.address,
           dripToken.address,
@@ -244,8 +245,8 @@ describe('Comptroller', () => {
           10,
           toWei('100'),
           10
-        )
-      ).to.be.revertedWith("Ownable: caller is not the owner")
+        ),
+      "Ownable: caller is not the owner")
     })
   })
 
@@ -311,15 +312,15 @@ describe('Comptroller', () => {
         10
       )
 
-      await expect(
-        comptroller2.deactivateVolumeDrip(
+      await revertedWith(
+        comptroller2.callStatic.deactivateVolumeDrip(
           prizePoolAddress,
           measure.address,
           dripToken.address,
           false,
           SENTINEL
-        )
-      ).to.be.revertedWith("Ownable: caller is not the owner")
+        ),
+        "Ownable: caller is not the owner")
     })
   })
 
@@ -409,16 +410,16 @@ describe('Comptroller', () => {
         10
       )
 
-      await expect(
-        comptroller2.setVolumeDrip(
+      await revertedWith(
+        comptroller2.callStatic.setVolumeDrip(
           prizePoolAddress,
           measure.address,
           dripToken.address,
           false,
           20,
           toWei('200')
-        )
-      ).to.be.revertedWith("Ownable: caller is not the owner")
+        ),
+      "Ownable: caller is not the owner")
     })
   })
 
