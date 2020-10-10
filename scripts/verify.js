@@ -2,7 +2,7 @@
 const chalk = require('chalk')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('../test/helpers/buidler')
 
 const info = (msg) => console.log(chalk.dim(msg))
 const success = (msg) => console.log(chalk.green(msg))

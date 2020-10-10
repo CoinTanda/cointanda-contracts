@@ -10,10 +10,10 @@ const networks = {
     allowUnlimitedContractSize: true
   },
   localhost: {
-    url: 'http://127.0.0.1:8545',
+    url: 'http://127.0.0.1:4444',
     blockGasLimit: 200000000,
     allowUnlimitedContractSize: true,
-    chainId: 31337
+    chainId: 33
   }
 }
 

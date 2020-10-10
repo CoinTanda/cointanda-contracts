@@ -1,4 +1,4 @@
-const buidler = require("@nomiclabs/buidler");
+const buidler = require('../test/helpers/buidler')
 
 const VALID_CHAIN_IDS = [3, 4, 5, 42]
 
@@ -31,6 +31,9 @@ const getChainName = (chainId) => {
     case 3: return 'ropsten';
     case 4: return 'rinkeby';
     case 5: return 'goerli';
+    case 30: return 'rskmainnet';
+    case 31: return 'rsktestnet';
+    case 33: return 'rskregtest';
     case 42: return 'kovan';
     case 31337: return 'buidlerEVM';
     default: return 'unknown';

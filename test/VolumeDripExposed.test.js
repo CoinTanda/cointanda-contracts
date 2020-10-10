@@ -4,7 +4,7 @@ const VolumeDripExposed = require('../build/VolumeDripExposed.json')
 const { call } = require('./helpers/call')
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 
 const toWei = ethers.utils.parseEther
 
