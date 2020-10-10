@@ -3,7 +3,7 @@ const MappedSinglyLinkedListExposed = require('../build/MappedSinglyLinkedListEx
 
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { AddressZero } = require('ethers').constants
 
 const toWei = ethers.utils.parseEther

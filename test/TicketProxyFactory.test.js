@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const TicketProxyFactory = require('../build/TicketProxyFactory.json')
 const TokenControllerInterface = require('../build/TokenControllerInterface.json')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { deployContract, deployMockContract } = require('ethereum-waffle')
 
 let overrides = { gasLimit: 20000000 }

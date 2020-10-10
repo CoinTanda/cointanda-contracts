@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const ControlledTokenProxyFactory = require('../build/ControlledTokenProxyFactory.json')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { deployContract } = require('ethereum-waffle')
 
 describe('ControlledTokenProxyFactory', () => {

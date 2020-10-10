@@ -3,7 +3,7 @@ const UInt256ArrayExposed = require('../build/UInt256ArrayExposed.json')
 
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 
 const debug = require('debug')('ptv3:UInt256ArrayExposed.test')
 

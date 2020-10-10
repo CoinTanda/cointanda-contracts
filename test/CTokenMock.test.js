@@ -3,7 +3,7 @@ const ERC20Mintable = require('../build/ERC20Mintable.json')
 const CTokenMock = require('../build/CTokenMock.json')
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 
 // Vanilla Mocha test. Increased compatibility with tools that integrate Mocha.
 describe('CTokenMock contract', function() {

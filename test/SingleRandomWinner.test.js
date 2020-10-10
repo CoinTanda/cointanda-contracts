@@ -12,8 +12,8 @@ const ControlledToken = require('../build/ControlledToken.json')
 const Ticket = require('../build/Ticket.json')
 
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
-const { AddressZero, Zero, One } = require('ethers').constants
+const buidler = require('./helpers/buidler')
+const { AddressZero, Zero } = require('ethers').constants
 
 
 const now = () => (new Date()).getTime() / 1000 | 0

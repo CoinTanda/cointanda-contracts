@@ -5,7 +5,7 @@ const IERC20 = require('../build/IERC20.json')
 
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { AddressZero } = require('ethers').constants
 
 const toWei = ethers.utils.parseEther

@@ -13,7 +13,7 @@ const networks = {
     chainId: 1337
   },
   localhost: {
-    url: 'http://127.0.0.1:8545',
+    url: 'http://127.0.0.1:4444',
     blockGasLimit: 200000000,
     allowUnlimitedContractSize: false,
     chainId: 1337

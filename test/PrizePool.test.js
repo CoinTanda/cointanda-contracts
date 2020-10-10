@@ -11,7 +11,7 @@ const IERC721 = require('../build/IERC721.json')
 
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { call } = require('./helpers/call')
 const { AddressZero } = require('ethers').constants
 
