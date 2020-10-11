@@ -1,5 +1,5 @@
 // features/support/world.js
-const buidler = require("@nomiclabs/buidler")
+const buidler = require('../../helpers/buidler')
 const ethers = require('ethers')
 const ERC20Mintable = require('../../../build/ERC20Mintable.json')
 const ERC721Mintable = require('../../../build/ERC721Mintable.json')
