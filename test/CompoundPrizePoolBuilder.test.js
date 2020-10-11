@@ -29,6 +29,7 @@ describe('CompoundPrizePoolBuilder', () => {
   beforeEach(async () => {
     [wallet] = await buidler.ethers.getSigners()
     await deployments.fixture()
+
     builder = await buidler.ethers.getContractAt(
       "CompoundPrizePoolBuilder",
       (await deployments.get("CompoundPrizePoolBuilder")).address,

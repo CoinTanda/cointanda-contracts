@@ -1,7 +1,7 @@
 const { deployContract } = require('ethereum-waffle')
 const { deployMockContract } = require('./helpers/deployMockContract')
 const { call } = require('./helpers/call')
-const { deploy1820 } = require('deploy-eip-1820')
+const { deploy1820 } = require('@thinkanddev/deploy-eip-1820-rsk')
 const ComptrollerInterface = require('../build/ComptrollerInterface.json')
 const SingleRandomWinnerHarness = require('../build/SingleRandomWinnerHarness.json')
 const PrizePool = require('../build/PrizePool.json')

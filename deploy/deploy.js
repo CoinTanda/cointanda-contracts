@@ -1,6 +1,6 @@
 const ProxyAdmin = require('../.build-openzeppelin/ProxyAdmin.json')
 const ProxyFactory = require('../.build-openzeppelin/ProxyFactory.json')
-const { deploy1820 } = require('deploy-eip-1820')
+const { deploy1820 } = require('@thinkanddev/deploy-eip-1820-rsk')
 const Comptroller = require("../build/Comptroller.json")
 
 const debug = require('debug')('ptv3:deploy.js')
@@ -37,11 +37,12 @@ module.exports = async (buidler) => {
     adminAccount
   } = await getNamedAccounts()
   const chainId = parseInt(await getChainId(), 10)
-  const isLocal = [1, 3, 4, 42].indexOf(chainId) == -1
+  const isLocal = [1, 3, 4, 42, 30, 31].indexOf(chainId) == -1
   // 31337 is unit testing, 1337 is for coverage
   const isTestEnvironment = chainId === 31337 || chainId === 1337 || chainId === 33
   let usingSignerAsAdmin = false
   const signer = await ethers.provider.getSigner(deployer)
+  Object.assign(signer.provider.formatter, { format: format })
 
   debug("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
   debug("Coin Tanda Contracts - Deploy Script")
@@ -119,14 +120,6 @@ module.exports = async (buidler) => {
       skipIfAlreadyDeployed: true
     })
 
-    await deploy("yDai", {
-      args: [
-        daiResult.address
-      ],
-      contract: 'yVaultMock',
-      from: deployer,
-      skipIfAlreadyDeployed: true
-    })
 
     // Display Contract Addresses
     debug("\n  Local Contract Deployments;\n")
@@ -195,19 +188,6 @@ module.exports = async (buidler) => {
     })
   }
 
-  let yVaultPrizePoolProxyFactoryResult
-  if (isTestEnvironment && !harnessDisabled) {
-    yVaultPrizePoolProxyFactoryResult = await deploy("yVaultPrizePoolProxyFactory", {
-      contract: 'yVaultPrizePoolHarnessProxyFactory',
-      from: deployer,
-      skipIfAlreadyDeployed: true
-    })
-  } else {
-    yVaultPrizePoolProxyFactoryResult = await deploy("yVaultPrizePoolProxyFactory", {
-      from: deployer,
-      skipIfAlreadyDeployed: true
-    })
-  }
 
   debug("\n  Deploying ControlledTokenProxyFactory...")
   const controlledTokenProxyFactoryResult = await deploy("ControlledTokenProxyFactory", {
@@ -267,18 +247,6 @@ module.exports = async (buidler) => {
     skipIfAlreadyDeployed: true
   })
 
-  debug("\n  Deploying yVaultPrizePoolBuilder...")
-  const yVaultPrizePoolBuilderResult = await deploy("yVaultPrizePoolBuilder", {
-    args: [
-      comptrollerAddress,
-      trustedForwarder,
-      yVaultPrizePoolProxyFactoryResult.address,
-      singleRandomWinnerBuilderResult.address
-    ],
-    from: deployer,
-    skipIfAlreadyDeployed: true
-  })
-
   debug("\n  Deploying StakePrizePoolBuilder...")
   const stakePrizePoolBuilderResult = await deploy("StakePrizePoolBuilder", {
     args: [
@@ -302,7 +270,6 @@ module.exports = async (buidler) => {
   debug("  - SingleRandomWinnerProxyFactory: ", singleRandomWinnerProxyFactoryResult.address)
   debug("  - SingleRandomWinnerBuilder:      ", singleRandomWinnerBuilderResult.address)
   debug("  - CompoundPrizePoolBuilder:       ", compoundPrizePoolBuilderResult.address)
-  debug("  - yVaultPrizePoolBuilder:         ", yVaultPrizePoolBuilderResult.address)
   debug("  - StakePrizePoolBuilder:          ", stakePrizePoolBuilderResult.address)
 
   debug("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
