@@ -297,7 +297,7 @@ describe('SingleRandomWinner', function() {
       await revertedWith(prizeStrategy.callStatic.removeExternalErc20Award(invalidExternalToken, SENTINEL), 'Invalid prevAddress')
     })
     it('should not allow anyone else to remove external ERC20 tokens from the prize', async () => {
-      await revertedWith(prizeStrategy.callStatic.connect(wallet2).removeExternalErc20Award(externalERC20Award.address, SENTINEL), 'Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).callStatic.removeExternalErc20Award(externalERC20Award.address, SENTINEL), 'Ownable: caller is not the owner')
     })
   })
 
@@ -332,7 +332,7 @@ describe('SingleRandomWinner', function() {
       await revertedWith(prizeStrategy.callStatic.removeExternalErc721Award(invalidExternalToken, SENTINEL), 'Invalid prevAddress')
     })
     it('should not allow anyone else to remove external ERC721 tokens from the prize', async () => {
-      await revertedWith(prizeStrategy.callStatic.connect(wallet2).removeExternalErc721Award(externalERC721Award.address, SENTINEL), 'Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).callStatic.removeExternalErc721Award(externalERC721Award.address, SENTINEL), 'Ownable: caller is not the owner')
     })
   })
 
