@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const ControlledToken = require('../build/ControlledToken.json')
 const TokenControllerInterface = require('../build/TokenControllerInterface.json')
 const buidler = require('./helpers/buidler')
-const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
+const { revertedWith } = require('./helpers/revertedWith')
 const { deployContract } = require('ethereum-waffle')
 const { deployMockContract } = require('./helpers/deployMockContract')
 
@@ -76,7 +76,7 @@ describe('ControlledToken', () => {
       await controller.mock.beforeTokenTransfer.returns()
 
       await controller.call(token, 'controllerMint', wallet._address, toWei('10'))
-      await revertedWith(controller.callStatic.call(token, 'controllerBurnFrom', wallet2._address, wallet._address, toWei('10')),
+      await revertedWith(controller.staticcall(token, 'controllerBurnFrom', wallet2._address, wallet._address, toWei('10')),
         'ControlledToken/exceeds-allowance')
     })
 

@@ -1,4 +1,5 @@
 const { PoolEnv } = require('./support/PoolEnv')
+const { revertedWith } = require('../helpers/revertedWith')
 
 describe('Tickets Feature', () => {
 
