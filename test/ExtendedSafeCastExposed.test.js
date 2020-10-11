@@ -4,7 +4,7 @@ const ExtendedSafeCastExposed = require('../build/ExtendedSafeCastExposed.json')
 const { ethers } = require('ethers')
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
-const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
+const { revertedWith } = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 

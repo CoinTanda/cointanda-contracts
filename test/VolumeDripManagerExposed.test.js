@@ -6,7 +6,7 @@ const IERC20 = require('../build/IERC20.json')
 const { ethers } = require('ethers')
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
-const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
+const { revertedWith } = require('./helpers/revertedWith')
 const { AddressZero } = require('ethers').constants
 
 const toWei = ethers.utils.parseEther

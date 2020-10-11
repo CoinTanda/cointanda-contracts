@@ -5,7 +5,16 @@ const revertedWith = async (promise, errMsg) => {
     await promise
     assert.fail('transaction not reverted');
   } catch (err) {
-    expect(err.message).to.include(errMsg)
+    if(err.value) {
+      try {
+        let value = await err.value;
+        assert.fail(`transaction not reverted: ${value}`);
+      } catch(errValue) {
+        expect(errValue.message).to.include(errMsg)
+      }
+    } else {
+      expect(err.message).to.include(errMsg)
+    }
   }
 }
 

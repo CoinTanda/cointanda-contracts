@@ -73,6 +73,8 @@ NOTE: When you run this command it will reset the local blockchain.
 
 ###### Connect Locally
 
+When using a local RSK node for test use this code for the node as it has a fix  allowUnlimitedContractSize and gasLimit flags  https://github.com/riflending/rskj/tree/riflending
+
 Start up a [Buidler Console](https://buidler.dev/guides/buidler-console.html):
 
 ```bash

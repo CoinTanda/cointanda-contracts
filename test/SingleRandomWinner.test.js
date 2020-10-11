@@ -13,7 +13,7 @@ const Ticket = require('../build/Ticket.json')
 
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
-const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
+const { revertedWith } = require('./helpers/revertedWith')
 const { AddressZero, Zero } = require('ethers').constants
 
 
@@ -260,7 +260,7 @@ describe('SingleRandomWinner', function() {
       await prizeStrategy.startAward();
 
       await revertedWith(
-        prizePool.call(
+        prizePool.staticcall(
           prizeStrategy,
           'beforeTokenTransfer(address,address,uint256,address)',
           wallet._address,

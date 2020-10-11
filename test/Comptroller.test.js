@@ -6,7 +6,7 @@ const { deployContract } = require('ethereum-waffle')
 const { deployMockContract } = require('./helpers/deployMockContract')
 const { AddressZero } = require("ethers").constants
 const { call } = require('./helpers/call')
-const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
+const { revertedWith } = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 
