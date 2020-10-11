@@ -76,7 +76,7 @@ describe('ControlledToken', () => {
       await controller.mock.beforeTokenTransfer.returns()
 
       await controller.call(token, 'controllerMint', wallet._address, toWei('10'))
-      await revertedWith(controller.callStatic.call(token, 'controllerBurnFrom', wallet2._address, wallet._address, toWei('10')),
+      await revertedWith(controller.call(token, 'controllerBurnFrom', wallet2._address, wallet._address, toWei('10')),
         'ControlledToken/exceeds-allowance')
     })
 

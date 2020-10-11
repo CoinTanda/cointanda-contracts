@@ -260,7 +260,7 @@ describe('SingleRandomWinner', function() {
       await prizeStrategy.startAward();
 
       await revertedWith(
-        prizePool.callStatic.call(
+        prizePool.call(
           prizeStrategy,
           'beforeTokenTransfer(address,address,uint256,address)',
           wallet._address,

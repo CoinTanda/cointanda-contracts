@@ -294,7 +294,6 @@ function PoolEnv() {
   this.poolAccrues = async function ({ tickets }) {
     debug(`poolAccrues(${tickets.toString()})...`)
     await this.env.cToken.accrueCustom(toWei(tickets))
-    await this.env.token.mint(this.env.yToken.address, toWei(tickets))
   }
 
   this.expectPoolToHavePrize = async function ({ tickets }) {

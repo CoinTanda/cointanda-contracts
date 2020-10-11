@@ -44,17 +44,14 @@ async function deployTestPool({
 
   let governanceToken = await deployContract(wallet, ERC20Mintable, ['Governance Token', 'GOV'], overrides)
 
-  let yVaultBuilderResult = await deployments.get("yVaultPrizePoolBuilder")
   let compoundBuilderResult = await deployments.get("CompoundPrizePoolBuilder")
   let comptrollerResult = await deployments.get("Comptroller")
   let rngServiceMockResult = await deployments.get("RNGServiceMock")
   let tokenResult = await deployments.get("Dai")
   let cTokenResult = await deployments.get("cDai")
-  let yTokenResult = await deployments.get("yDai")
 
   const token = await buidler.ethers.getContractAt('ERC20Mintable', tokenResult.address, wallet)
   const cToken = await buidler.ethers.getContractAt('CTokenMock', cTokenResult.address, wallet)
-  const yToken = await buidler.ethers.getContractAt('yVaultMock', yTokenResult.address, wallet)
   const comptroller = await buidler.ethers.getContractAt('ComptrollerHarness', comptrollerResult.address, wallet)
 
   let linkToken = await deployContract(wallet, ERC20Mintable, ['Link Token', 'LINK'], overrides)
@@ -76,35 +73,17 @@ async function deployTestPool({
   }
 
   let prizePool
-  if (yVault) {
-    debug(`Creating yVault prize pool config: ${yTokenResult.address}`)
-    const yToken = await buidler.ethers.getContractAt('yVaultMock', yTokenResult.address, wallet)
-    debug(`yToken token: ${await yToken.token()} and token ${token.address}`)
-    const yVaultPrizePoolConfig = {
-      vault: yTokenResult.address,
-      reserveRateMantissa: toWei('0.05'),
-      maxExitFeeMantissa,
-      maxTimelockDuration
-    }
-    debug(`Loading yVaultPrizePool Builder ${yVaultBuilderResult.address}`)
-    const builder = await buidler.ethers.getContractAt('yVaultPrizePoolBuilder', yVaultBuilderResult.address, wallet)
-    debug(`creating single random winner: `, yVaultPrizePoolConfig, singleRandomWinnerConfig)
-    let tx = await builder.createSingleRandomWinner(yVaultPrizePoolConfig, singleRandomWinnerConfig, await token.decimals())
-    let events = await getEvents(tx, builder)
-    let event = events[0]
-    prizePool = await buidler.ethers.getContractAt('yVaultPrizePoolHarness', event.args.prizePool, wallet)
-  } else {
-    const compoundPrizePoolConfig = {
-      cToken: cTokenResult.address,
-      maxExitFeeMantissa,
-      maxTimelockDuration
-    }
-    const builder = await buidler.ethers.getContractAt('CompoundPrizePoolBuilder', compoundBuilderResult.address, wallet)
-    let tx = await builder.createSingleRandomWinner(compoundPrizePoolConfig, singleRandomWinnerConfig, await token.decimals())
-    let events = await getEvents(tx, builder)
-    let event = events[0]
-    prizePool = await buidler.ethers.getContractAt('CompoundPrizePoolHarness', event.args.prizePool, wallet)
+  const compoundPrizePoolConfig = {
+    cToken: cTokenResult.address,
+    maxExitFeeMantissa,
+    maxTimelockDuration
   }
+  const builder = await buidler.ethers.getContractAt('CompoundPrizePoolBuilder', compoundBuilderResult.address, wallet)
+  let tx = await builder.createSingleRandomWinner(compoundPrizePoolConfig, singleRandomWinnerConfig, await token.decimals())
+  let events = await getEvents(tx, builder)
+  let event = events[0]
+  prizePool = await buidler.ethers.getContractAt('CompoundPrizePoolHarness', event.args.prizePool, wallet)
+
 
 
   debug("created prizePool: ", prizePool.address)
@@ -136,7 +115,6 @@ async function deployTestPool({
     rngService: rngServiceMock,
     token,
     cToken,
-    yToken,
     comptroller,
     prizeStrategy,
     prizePool,
