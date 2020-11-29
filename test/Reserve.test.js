@@ -4,6 +4,7 @@ const PrizePoolInterface = require('../build/PrizePoolInterface.json')
 const buidler = require('@nomiclabs/buidler')
 const { deployContract } = require('ethereum-waffle')
 const { deployMockContract } = require('./helpers/deployMockContract')
+const { revertedWith } = require('./helpers/revertedWith')
 const { AddressZero } = require("ethers").constants
 
 const overrides = { gasLimit: 20000000 }
@@ -34,15 +35,13 @@ describe('Reserve', () => {
     })
 
     it('should not be callable by anyone else', async () => {
-      await expect(reserve.connect(wallet2).setRateMantissa('1000'))
-        .to.be.revertedWith("Ownable: caller is not the owner")
+      await revertedWith(reserve.connect(wallet2).setRateMantissa('1000'), "Ownable: caller is not the owner")
     })
   })
 
   describe('withdrawReserve', () => {
     it('should only be callable by the owner', async () => {
-      await expect(reserve.connect(wallet2).withdrawReserve(wallet._address, wallet._address))
-        .to.be.revertedWith("Ownable: caller is not the owner")
+      await revertedWith(reserve.connect(wallet2).withdrawReserve(wallet._address, wallet._address), "Ownable: caller is not the owner")
     })
 
     it('should be callable by the owner', async () => {

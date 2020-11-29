@@ -37,7 +37,7 @@
     "@pooltogether/fixed-point": "pooltogether/fixed-point.git#0.1.0-upgradeable.1",
     "@pooltogether/pooltogether-rng-contracts": "^1.0.0",
     "@pooltogether/uniform-random-number": "pooltogether/uniform-random-number#solidity-0.6",
-    "deploy-eip-1820": "1.0.0",
+    "@thinkanddev/deploy-eip-1820-rsk": "1.0.0",
     "sortition-sum-tree-factory": "0.1.0"
   },
   "devDependencies": {
@@ -73,5 +73,8 @@
     "deployments/**",
     "deploy/**",
     "js/**"
-  ]
+  ],
+  "engines": {
+    "node": "=10.X"
+  }
 }

@@ -1,5 +1,5 @@
 const { PoolEnv } = require('./support/PoolEnv')
-const { revertedWith } = require('../helpers/revertedWith')
+const { expect } = require("chai");
 
 describe('Tickets Feature', () => {
 

@@ -63,7 +63,6 @@ async function deployMockContract(wallet, abi) {
       throw new Error('Cannot staticcall function with no outputs');
     }
     const tx = await contract.populateTransaction[functionName](...params);
-    console.log('tx', tx)
     const data = tx.data;
     let result;
     let returnValue = mockContractInstance.__waffle__staticcall(contract.address, data);

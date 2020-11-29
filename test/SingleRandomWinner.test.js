@@ -1,7 +1,7 @@
 const { deployContract } = require('ethereum-waffle')
 const { deployMockContract } = require('./helpers/deployMockContract')
 const { call } = require('./helpers/call')
-const { deploy1820 } = require('deploy-eip-1820')
+const { deploy1820 } = require('@thinkanddev/deploy-eip-1820-rsk')
 const TokenListenerInterface = require('../build/TokenListenerInterface.json')
 const SingleRandomWinnerHarness = require('../build/SingleRandomWinnerHarness.json')
 const PrizePool = require('../build/PrizePool.json')
@@ -305,7 +305,7 @@ describe('SingleRandomWinner', function() {
       await revertedWith(prizeStrategy.callStatic.removeExternalErc20Award(invalidExternalToken, SENTINEL), 'Invalid prevAddress')
     })
     it('should not allow anyone else to remove external ERC20 tokens from the prize', async () => {
-      await revertedWith(prizeStrategy.callStatic.connect(wallet2).removeExternalErc20Award(externalERC20Award.address, SENTINEL), 'Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).callStatic.removeExternalErc20Award(externalERC20Award.address, SENTINEL), 'Ownable: caller is not the owner')
     })
   })
 
@@ -353,7 +353,7 @@ describe('SingleRandomWinner', function() {
       await revertedWith(prizeStrategy.callStatic.removeExternalErc721Award(invalidExternalToken, SENTINEL), 'Invalid prevAddress')
     })
     it('should not allow anyone else to remove external ERC721 tokens from the prize', async () => {
-      await revertedWith(prizeStrategy.callStatic.connect(wallet2).removeExternalErc721Award(externalERC721Award.address, SENTINEL), 'Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).callStatic.removeExternalErc721Award(externalERC721Award.address, SENTINEL), 'Ownable: caller is not the owner')
     })
   })
 
@@ -364,8 +364,7 @@ describe('SingleRandomWinner', function() {
       .to.not.be.revertedWith('Ownable: caller is not the owner')
     })
     it('should not allow arbitrary tokens to be transferred by anyone else', async () => {
-      await expect(prizeStrategy.connect(wallet2).transferExternalERC20(wallet._address, externalERC20Award.address, toWei('10')))
-        .to.be.revertedWith('Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).transferExternalERC20(wallet._address, externalERC20Award.address, toWei('10')), 'Ownable: caller is not the owner')
     })
   })
 

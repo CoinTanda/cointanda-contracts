@@ -52,7 +52,7 @@ describe('BalanceDripManagerExposed', function() {
 
     it('should not add a drip token twice', async () => {
       await dripExposed.activateDrip(measure.address, drip1.address, toWei('0.001'))
-      await expect(dripExposed.activateDrip(measure.address, drip1.address, toWei('0.001'))).to.be.revertedWith('BalanceDripManager/drip-active')
+      await revertedWith(dripExposed.activateDrip(measure.address, drip1.address, toWei('0.001')), 'BalanceDripManager/drip-active')
     })
   })
 
@@ -79,8 +79,7 @@ describe('BalanceDripManagerExposed', function() {
 
   describe('setDripRate()', () => {
     it('should revert when setting drips that are not active', async () => {
-      await expect(dripExposed.setDripRate(measure.address, invalidDrip, toWei('0.001'), '1', toWei('100')))
-        .to.be.revertedWith('BalanceDripManager/drip-not-active')
+      await revertedWith(dripExposed.setDripRate(measure.address, invalidDrip, toWei('0.001'), '1', toWei('100')), 'BalanceDripManager/drip-not-active')
     })
 
     it('should allow the drip rate to be changed', async () => {

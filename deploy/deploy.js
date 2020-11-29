@@ -1,4 +1,4 @@
-const { deploy1820 } = require('deploy-eip-1820')
+const { deploy1820 } = require('@thinkanddev/deploy-eip-1820-rsk')
 
 const debug = require('debug')('ptv3:deploy.js')
 
@@ -46,6 +46,7 @@ module.exports = async (buidler) => {
   Object.assign(ethers.provider.formatter, { format: format })
 
   const signer = await ethers.provider.getSigner(deployer)
+  Object.assign(signer.provider.formatter, { format: format })
 
   debug("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
   debug("Coin Tanda Contracts - Deploy Script")
@@ -139,17 +140,20 @@ module.exports = async (buidler) => {
 
   let reserveAddress = reserve
   // if not set by named config
-  const reserveResult = await deploy("Reserve", {
-    from: deployer,
-    skipIfAlreadyDeployed: true
-  })
-  const reserveContract = await buidler.ethers.getContractAt(
-    "Reserve",
-    reserveResult.address,
-    signer
-  )
-  if (adminAccount !== deployer) {
-    await reserveContract.transferOwnership(adminAccount)
+  if (!reserveAddress) {
+    const reserveResult = await deploy("Reserve", {
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+    reserveAddress = reserveResult.address
+    const reserveContract = await buidler.ethers.getContractAt(
+      "Reserve",
+      reserveResult.address,
+      signer
+    )
+    if (adminAccount !== deployer) {
+      await reserveContract.transferOwnership(adminAccount)
+    }
   }
 
   const reserveRegistryResult = await deploy("ReserveRegistry", {
@@ -162,8 +166,8 @@ module.exports = async (buidler) => {
     reserveRegistryResult.address,
     signer
   )
-  if (await reserveRegistryContract.lookup() != reserveResult.address) {
-    await reserveRegistryContract.register(reserveResult.address)
+  if (await reserveRegistryContract.lookup() != reserveAddress) {
+    await reserveRegistryContract.register(reserveAddress)
   }
   if (adminAccount !== deployer) {
     await reserveRegistryContract.transferOwnership(adminAccount)

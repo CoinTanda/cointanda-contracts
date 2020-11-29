@@ -469,7 +469,7 @@ describe('Comptroller', () => {
 
   describe('transferOut()', () => {
     it('should not allow anyone else to transfer out', async () => {
-      await expect(comptroller.connect(wallet2).transferOut(dripToken.address, wallet._address, toWei('10'))).to.be.revertedWith("Ownable: caller is not the owner")
+      await revertedWith(comptroller.connect(wallet2).transferOut(dripToken.address, wallet._address, toWei('10')), "Ownable: caller is not the owner")
     })
 
     it('should allow the owner to transfer tokens out', async () => {

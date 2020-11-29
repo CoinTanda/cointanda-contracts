@@ -900,8 +900,7 @@ describe('PrizePool', function() {
     it('should only allow the prizeStrategy to award external ERC721s', async () => {
       await yieldSourceStub.mock.canAwardExternal.withArgs(erc721token.address).returns(true)
       let prizePool2 = prizePool.connect(wallet2)
-      await expect(prizePool2.awardExternalERC721(wallet._address, erc721token.address, [NFT_TOKEN_ID]))
-        .to.be.revertedWith('PrizePool/only-prizeStrategy')
+      await revertedWith(prizePool2.awardExternalERC721(wallet._address, erc721token.address, [NFT_TOKEN_ID]), 'PrizePool/only-prizeStrategy')
     })
 
     it('should allow arbitrary tokens to be transferred', async () => {

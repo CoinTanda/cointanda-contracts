@@ -7,6 +7,7 @@ const { deployContract, deployMockContract } = require('ethereum-waffle')
 const { AddressZero } = buidler.ethers.constants
 
 const { signPermit } = require('./helpers/signPermit.js')
+const { revertedWith } = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 
@@ -88,14 +89,14 @@ describe('PermitAndDepositDai', () => {
       
       await prizePool.mock.depositTo.withArgs(wallet2._address, toWei('100'), AddressZero, AddressZero).returns()
       
-      await expect(
+      await revertedWith(
         permitAndDepositTo({
           prizePool: prizePool.address,
           to: wallet2._address,
           fromWallet: wallet2,
           amount: toWei('100')
-        })
-      ).to.be.revertedWith('PermitAndDepositDai/only-signer')
+        }),
+      'PermitAndDepositDai/only-signer')
     })
   })
 
