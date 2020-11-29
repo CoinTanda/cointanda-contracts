@@ -17,5 +17,7 @@ abis
 test-results.xml
 .DS_Store
 deployments/local*
+deployments/buidlerevm*
+deployments/rskregtest*
 Networks.md
 deployments/fork*

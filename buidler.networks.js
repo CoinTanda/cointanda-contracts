@@ -9,13 +9,20 @@ const networks = {
   coverage: {
     url: 'http://127.0.0.1:8555',
     blockGasLimit: 200000000,
-    allowUnlimitedContractSize: true
+    allowUnlimitedContractSize: true,
+    chainId: 1337
   },
   localhost: {
     url: 'http://127.0.0.1:8545',
     blockGasLimit: 200000000,
-    allowUnlimitedContractSize: true,
-    chainId: 31337
+    allowUnlimitedContractSize: false,
+    chainId: 1337
+  },
+  rskregtest: {
+    url: 'http://127.0.0.1:4444',
+    blockGasLimit: 68000000,
+    allowUnlimitedContractSize: false,
+    chainId: 33
   }
 }
 

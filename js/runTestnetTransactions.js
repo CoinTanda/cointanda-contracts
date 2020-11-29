@@ -32,6 +32,9 @@ const getChainName = (chainId) => {
     case 4: return 'rinkeby';
     case 5: return 'goerli';
     case 42: return 'kovan';
+    case 30: return 'rskmainnet';
+    case 31: return 'rsktestnet';
+    case 1337: return 'localhost';
     case 31337: return 'buidlerEVM';
     default: return 'unknown';
   }

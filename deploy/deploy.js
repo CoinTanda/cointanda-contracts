@@ -9,6 +9,11 @@ const chainName = (chainId) => {
     case 4: return 'Rinkeby';
     case 5: return 'Goerli';
     case 42: return 'Kovan';
+    case 30: return 'Rsk Mainnet';
+    case 31: return 'Rsk testnet';
+    case 33: return 'Rsk regtest';
+    case 1337: return 'Coverage';
+    case 5777: return 'Ganache';
     case 31337: return 'BuidlerEVM';
     default: return 'Unknown';
   }
@@ -29,9 +34,18 @@ module.exports = async (buidler) => {
     reserve
   } = await getNamedAccounts()
   const chainId = parseInt(await getChainId(), 10)
-  const isLocal = [1, 3, 4, 42].indexOf(chainId) == -1
-  // 31337 is unit testing, 1337 is for coverage
-  const isTestEnvironment = chainId === 31337 || chainId === 1337
+  debug('ChainID', chainId);
+  const isLocal = [1, 3, 4, 42, 30, 31].indexOf(chainId) == -1
+  // 31337 is unit testing, 1337 is for coverage, 33 is rsk regtest
+  const isTestEnvironment = chainId === 31337 || chainId === 1337 || chainId === 33
+  debug('isTestEnvironment', isTestEnvironment);
+  // Fix transaction format  error from etherjs getTransactionReceipt as transactionReceipt format
+  // checks root to be a 32 bytes hash when on RSK its 0x01
+  debug('ethers.provider', ethers.provider);
+  const format = ethers.provider.formatter.formats
+  if (format) format.receipt['root'] = format.receipt['logsBloom']
+  Object.assign(ethers.provider.formatter, { format: format })
+
   const signer = await ethers.provider.getSigner(deployer)
 
   debug("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
