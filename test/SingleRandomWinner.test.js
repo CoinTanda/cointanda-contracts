@@ -13,6 +13,7 @@ const Ticket = require('../build/Ticket.json')
 
 const { expect } = require('chai')
 const buidler = require('./helpers/buidler')
+const { BigNumber } = require('ethers')
 const { AddressZero, Zero } = require('ethers').constants
 
 
@@ -322,7 +323,7 @@ describe('SingleRandomWinner', function() {
         .to.deep.equal([externalERC721Award.address])
 
       expect(await prizeStrategy.connect(wallet2).getExternalErc721AwardTokenIds(externalERC721Award.address))
-        .to.deep.equal([One])
+        .to.deep.equal([BigNumber.from(1)])
     })
   })
 
