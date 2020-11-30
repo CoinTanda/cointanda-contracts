@@ -11,7 +11,7 @@ import "./TicketInterface.sol";
 contract Ticket is ControlledToken, TicketInterface {
   using SortitionSumTreeFactory for SortitionSumTreeFactory.SortitionSumTrees;
 
-  bytes32 constant private TREE_KEY = keccak256("PoolTogether/Ticket");
+  bytes32 constant private TREE_KEY = keccak256("CoinTanda/Ticket");
   uint256 constant private MAX_TREE_LEAVES = 5;
 
   // Ticket-weighted odds

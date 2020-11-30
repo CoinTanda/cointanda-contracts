@@ -58,7 +58,8 @@ const config = {
     rng: {
       42: RNGBlockhashKovan.address,
       4: RNGBlockhashRinkeby.address,
-      3: RNGBlockhashRopsten.address
+      3: RNGBlockhashRopsten.address,
+      31: '0x2ad445b0efcb337db6682f6b904f0263bae85509'
     },
     adminAccount: {
       42: testnetAdmin,

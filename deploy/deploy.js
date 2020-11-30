@@ -278,7 +278,8 @@ module.exports = async (buidler) => {
   })
 
   debug("\n  Deploying yVaultPrizePoolBuilder...")
-  const yVaultPrizePoolBuilderResult = await deploy("yVaultPrizePoolBuilder", {
+  let yVaultPrizePoolBuilderResult
+  yVaultPrizePoolBuilderResult = await deploy("yVaultPrizePoolBuilder", {
     args: [
       reserveRegistryResult.address,
       trustedForwarder,
@@ -312,7 +313,7 @@ module.exports = async (buidler) => {
   debug("  - ControlledTokenBuilder:         ", controlledTokenBuilderResult.address)
   debug("  - SingleRandomWinnerBuilder:      ", singleRandomWinnerBuilderResult.address)
   debug("  - CompoundPrizePoolBuilder:       ", compoundPrizePoolBuilderResult.address)
-  debug("  - yVaultPrizePoolBuilder:         ", yVaultPrizePoolBuilderResult.address)
+  debug("  - yVaultPrizePoolBuilder:         ", yVaultPrizePoolBuilderResult ? yVaultPrizePoolBuilderResult.address: 'not deployed')
   debug("  - StakePrizePoolBuilder:          ", stakePrizePoolBuilderResult.address)
   if (permitAndDepositDaiResult) {
     debug("  - PermitAndDepositDai:            ", permitAndDepositDaiResult.address)
