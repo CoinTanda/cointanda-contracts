@@ -11,10 +11,8 @@ For an overview of the concepts and API please see the [documentation](https://d
 This project is available as an NPM package:
 
 ```bash
-$ yarn add @cointanda/cointanda-contracts@alpha
+$ yarn add @cointanda/cointanda-contracts
 ```
-
-Notice the `alpha` tag: this is important!  Otherwise you'll get the V2 code.
 
 #### Usage
 
@@ -34,8 +32,8 @@ For example, to pull in the CompoundPrizePoolBuilder artifact:
 ```javascript
 const CompoundPrizePoolBuilder = require('@cointanda/cointanda-contracts/deployments/rinkeby/CompoundPrizePoolBuilder.json')
 const {
-  abi, 
-  address, 
+  abi,
+  address,
   receipt
  } = CompoundPrizePoolBuilder
 ```
@@ -52,13 +50,7 @@ const PrizePool = require('@cointanda/cointanda-contracts/abis/PrizePool.json')
 
 #### Development
 
-First clone this repository and enter the directory.
-
-Switch to the `version-3` branch:
-
-```
-$ git checkout version-3
-```
+First clone this repository
 
 Install dependencies:
 

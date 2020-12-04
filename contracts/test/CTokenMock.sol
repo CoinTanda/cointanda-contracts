@@ -1,21 +1,21 @@
 /**
-Copyright 2019 PoolTogether LLC
+Copyright 2020 Coin Tanda
 
-This file is part of PoolTogether.
+This file is part of Coin Tanda.
 
-PoolTogether is free software: you can redistribute it and/or modify
+Coin Tanda is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation under version 3 of the License.
 
-PoolTogether is distributed in the hope that it will be useful,
+Coin Tanda is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with PoolTogether.  If not, see <https://www.gnu.org/licenses/>.
+along with Coin Tanda.  If not, see <https://www.gnu.org/licenses/>.
 */
-
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.6.0 <0.7.0;
 
 import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol";

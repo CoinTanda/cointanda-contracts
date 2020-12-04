@@ -40,7 +40,7 @@ async function main() {
   // Run with CLI flag --silent to suppress log output
 
   console.log("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-  console.log("PoolTogether Pool Contracts - Drip Tokens Script")
+  console.log("Coin Tanda Pool Contracts - Drip Tokens Script")
   console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
   const { getNamedAccounts, deployments, getChainId, ethers } = buidler

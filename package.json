@@ -1,5 +1,5 @@
 {
-  "name": "@pooltogether/pooltogether-contracts",
+  "name": "@cointanda/cointanda-contracts",
   "version": "3.0.1",
   "description": "PoolManager Prize Linked Savings Account Pool Smart Contracts",
   "main": "index.js",
