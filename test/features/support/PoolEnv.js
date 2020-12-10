@@ -177,6 +177,37 @@ function PoolEnv() {
     debug(`Bought tickets`)
   }
 
+  this.buyTicketsCallStatic = async function ({ user, tickets, referrer }) {
+    debug(`Buying tickets...`)
+    let wallet = await this.wallet(user)
+
+    debug('wallet is ', wallet._address)
+
+    let token = await this.token(wallet)
+    let ticket = await this.ticket(wallet)
+    let prizePool = await this.prizePool(wallet)
+
+    let amount = toWei(tickets)
+
+    let balance = await token.balanceOf(wallet._address)
+    if (balance.lt(amount)) {
+      await token.mint(wallet._address, amount, this.overrides)
+    }
+
+    await token.approve(prizePool.address, amount, this.overrides)
+
+    let referrerAddress = AddressZero
+    if (referrer) {
+      referrerAddress = (await this.wallet(referrer))._address
+    }
+
+    debug(`Depositing... (${wallet._address}, ${amount}, ${ticket.address}, ${referrerAddress})`)
+
+    await prizePool.callStatic.depositTo(wallet._address, amount, ticket.address, referrerAddress, this.overrides)
+
+    debug(`Bought tickets`)
+  }
+
   this.timelockBuyTickets = async function ({ user, tickets }) {
     debug(`Buying tickets with timelocked tokens...`)
     let wallet = await this.wallet(user)
@@ -359,10 +390,6 @@ function PoolEnv() {
     debug('award completed')
   }
 
-  this.expectRevertWith = async function (promise, msg) {
-    await expect(promise).to.be.revertedWith(msg)
-  }
-
   this.awardPrize = async function () {
     await this.awardPrizeToToken({ token: 0 })
   }
@@ -382,6 +409,13 @@ function PoolEnv() {
   this.draw = async function ({ token }) {
     let winner = await this.env.ticket.draw(token)
     debug(`draw(${token}) = ${winner}`)
+  }
+
+  this.transferTicketsCallStatic = async function ({ user, tickets, to }) {
+    let wallet = await this.wallet(user)
+    let ticket = await this.ticket(wallet)
+    let toWallet = await this.wallet(to)
+    await ticket.callStatic.transfer(toWallet._address, toWei(tickets))
   }
 
   this.withdrawInstantly = async function ({user, tickets}) {

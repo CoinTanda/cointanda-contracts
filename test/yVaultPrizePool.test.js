@@ -8,7 +8,8 @@ const ERC20Mintable = require('../build/ERC20Mintable.json')
 
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
+const { revertedWith, notRevertedWith} = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 
@@ -83,7 +84,7 @@ describe('yVaultPrizePool', function() {
     })
 
     it('should not allow anyone but the owner to set the reserve rate mantissa', async () => {
-      await expect(prizePool.connect(wallet2).setReserveRateMantissa(toWei('0.1'))).to.be.revertedWith('Ownable: caller is not the owner')
+      await revertedWith(prizePool.connect(wallet2).callStatic.setReserveRateMantissa(toWei('0.1')), 'Ownable: caller is not the owner')
     })
   })
 
@@ -114,7 +115,7 @@ describe('yVaultPrizePool', function() {
     })
 
     it('should revert if reserve is exceeded', async () => {
-      await expect(prizePool.redeem(amount)).to.be.revertedWith("yVaultPrizePool/insuff-liquidity")
+      await revertedWith(prizePool.callStatic.redeem(amount), "yVaultPrizePool/insuff-liquidity")
     })
 
     it('should allow a user to withdraw', async () => {

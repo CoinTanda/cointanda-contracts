@@ -1,4 +1,4 @@
-# PoolTogether V3 Alpha Release Process
+# Coin Tanda Alpha Release Process
 
 Once the smart contracts have been updated, follow the steps below.
 
@@ -18,7 +18,7 @@ $ yarn deploy rinkeby
 $ yarn etherscan-verify rinkeby
 ```
 
-## 3. Publish pooltogether-contracts npm package
+## 3. Publish  ointanda-contracts npm package
 
 Increment the version in `package.json` then publish the package:
 
@@ -75,8 +75,8 @@ The [Generate Networks Doc](https://github.com/pooltogether/generate-networks-do
 
 Update all of the dependencies in package.json to the newest packages:
 
-- `@pooltogether/current-pool-data`
-- `@pooltogether/pooltogether-contracts`
-- `@pooltogether/pooltogether-rng-contracts`
+- `@cointanda/current-pool-data`
+- `@cointanda/cointanda-contracts`
+- `@thinkanddev/rng-contracts`
 
 And follow the generate docs instructions.

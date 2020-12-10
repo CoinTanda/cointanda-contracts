@@ -1,5 +1,5 @@
 const { deployments } = require("@nomiclabs/buidler");
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('../test/helpers/buidler')
 const ERC20Mintable = require('../build/ERC20Mintable.json')
 
 const ethers = require('ethers')

@@ -1,6 +1,7 @@
-const { deploy1820 } = require('deploy-eip-1820')
+const { deploy1820 } = require('@thinkanddev/deploy-eip-1820-rsk')
 
-const debug = require('debug')('ptv3:deploy.js')
+//const debug = require('debug')('ptv3:deploy.js')
+const debug = console.log;
 
 const chainName = (chainId) => {
   switch(chainId) {
@@ -9,6 +10,11 @@ const chainName = (chainId) => {
     case 4: return 'Rinkeby';
     case 5: return 'Goerli';
     case 42: return 'Kovan';
+    case 30: return 'Rsk Mainnet';
+    case 31: return 'Rsk testnet';
+    case 33: return 'Rsk regtest';
+    case 1337: return 'Coverage';
+    case 5777: return 'Ganache';
     case 31337: return 'BuidlerEVM';
     default: return 'Unknown';
   }
@@ -29,13 +35,22 @@ module.exports = async (buidler) => {
     reserve
   } = await getNamedAccounts()
   const chainId = parseInt(await getChainId(), 10)
-  const isLocal = [1, 3, 4, 42].indexOf(chainId) == -1
-  // 31337 is unit testing, 1337 is for coverage
-  const isTestEnvironment = chainId === 31337 || chainId === 1337
+  debug('ChainID', chainId);
+  const isLocal = [1, 3, 4, 42, 30, 31].indexOf(chainId) == -1
+  // 31337 is unit testing, 1337 is for coverage, 33 is rsk regtest
+  const isTestEnvironment = chainId === 31337 || chainId === 1337 || chainId === 33
+  debug('isTestEnvironment', isTestEnvironment);
+  // Fix transaction format  error from etherjs getTransactionReceipt as transactionReceipt format
+  // checks root to be a 32 bytes hash when on RSK its 0x01
+  const format = ethers.provider.formatter.formats
+  if (format) format.receipt['root'] = format.receipt['logsBloom']
+  Object.assign(ethers.provider.formatter, { format: format })
+
   const signer = await ethers.provider.getSigner(deployer)
+  Object.assign(signer.provider.formatter, { format: format })
 
   debug("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-  debug("PoolTogether Pool Contracts - Deploy Script")
+  debug("Coin Tanda Contracts - Deploy Script")
   debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
   const locus = isLocal ? 'local' : 'remote'
@@ -126,17 +141,20 @@ module.exports = async (buidler) => {
 
   let reserveAddress = reserve
   // if not set by named config
-  const reserveResult = await deploy("Reserve", {
-    from: deployer,
-    skipIfAlreadyDeployed: true
-  })
-  const reserveContract = await buidler.ethers.getContractAt(
-    "Reserve",
-    reserveResult.address,
-    signer
-  )
-  if (adminAccount !== deployer) {
-    await reserveContract.transferOwnership(adminAccount)
+  if (!reserveAddress) {
+    const reserveResult = await deploy("Reserve", {
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+    reserveAddress = reserveResult.address
+    const reserveContract = await buidler.ethers.getContractAt(
+      "Reserve",
+      reserveResult.address,
+      signer
+    )
+    if (adminAccount !== deployer) {
+      await reserveContract.transferOwnership(adminAccount)
+    }
   }
 
   const reserveRegistryResult = await deploy("ReserveRegistry", {
@@ -149,19 +167,21 @@ module.exports = async (buidler) => {
     reserveRegistryResult.address,
     signer
   )
-  if (await reserveRegistryContract.lookup() != reserveResult.address) {
-    await reserveRegistryContract.register(reserveResult.address)
+  if (await reserveRegistryContract.lookup() != reserveAddress) {
+    await reserveRegistryContract.register(reserveAddress)
   }
   if (adminAccount !== deployer) {
     await reserveRegistryContract.transferOwnership(adminAccount)
   }
 
   let permitAndDepositDaiResult
-  debug("\n  Deploying PermitAndDepositDai...")
-  permitAndDepositDaiResult = await deploy("PermitAndDepositDai", {
-    from: deployer,
-    skipIfAlreadyDeployed: true
-  })
+  if (chainId != 30 && chainId != 31) {
+    debug("\n  Deploying PermitAndDepositDai...")
+    permitAndDepositDaiResult = await deploy("PermitAndDepositDai", {
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+  }
 
   debug("\n  Deploying CompoundPrizePoolProxyFactory...")
   let compoundPrizePoolProxyFactoryResult
@@ -179,17 +199,19 @@ module.exports = async (buidler) => {
   }
 
   let yVaultPrizePoolProxyFactoryResult
-  if (isTestEnvironment && !harnessDisabled) {
-    yVaultPrizePoolProxyFactoryResult = await deploy("yVaultPrizePoolProxyFactory", {
-      contract: 'yVaultPrizePoolHarnessProxyFactory',
-      from: deployer,
-      skipIfAlreadyDeployed: true
-    })
-  } else {
-    yVaultPrizePoolProxyFactoryResult = await deploy("yVaultPrizePoolProxyFactory", {
-      from: deployer,
-      skipIfAlreadyDeployed: true
-    })
+  if (chainId != 30 && chainId != 31) {
+    if (isTestEnvironment && !harnessDisabled) {
+      yVaultPrizePoolProxyFactoryResult = await deploy("yVaultPrizePoolProxyFactory", {
+        contract: 'yVaultPrizePoolHarnessProxyFactory',
+        from: deployer,
+        skipIfAlreadyDeployed: true
+      })
+    } else {
+      yVaultPrizePoolProxyFactoryResult = await deploy("yVaultPrizePoolProxyFactory", {
+        from: deployer,
+        skipIfAlreadyDeployed: true
+      })
+    }
   }
 
   debug("\n  Deploying ControlledTokenProxyFactory...")
@@ -204,11 +226,14 @@ module.exports = async (buidler) => {
     skipIfAlreadyDeployed: true
   })
 
-  debug("\n  Deploying StakePrizePoolProxyFactory...")
-  const stakePrizePoolProxyFactoryResult = await deploy("StakePrizePoolProxyFactory", {
-    from: deployer,
-    skipIfAlreadyDeployed: true
-  })
+  let stakePrizePoolProxyFactoryResult
+  if (chainId != 30 && chainId != 31) {
+    debug("\n  Deploying StakePrizePoolProxyFactory...") // for creating new yVault Prize Pools
+    stakePrizePoolProxyFactoryResult = await deploy("StakePrizePoolProxyFactory", {
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+  }
 
   debug("\n  Deploying ControlledTokenBuilder...")
   const controlledTokenBuilderResult = await deploy("ControlledTokenBuilder", {
@@ -260,29 +285,36 @@ module.exports = async (buidler) => {
     skipIfAlreadyDeployed: true
   })
 
-  debug("\n  Deploying yVaultPrizePoolBuilder...")
-  const yVaultPrizePoolBuilderResult = await deploy("yVaultPrizePoolBuilder", {
-    args: [
-      reserveRegistryResult.address,
-      trustedForwarder,
-      yVaultPrizePoolProxyFactoryResult.address,
-      singleRandomWinnerBuilderResult.address
-    ],
-    from: deployer,
-    skipIfAlreadyDeployed: true
-  })
 
-  debug("\n  Deploying StakePrizePoolBuilder...")
-  const stakePrizePoolBuilderResult = await deploy("StakePrizePoolBuilder", {
-    args: [
-      reserveRegistryResult.address,
-      trustedForwarder,
-      stakePrizePoolProxyFactoryResult.address,
-      singleRandomWinnerBuilderResult.address
-    ],
-    from: deployer,
-    skipIfAlreadyDeployed: true
-  })
+  let yVaultPrizePoolBuilderResult
+  if (chainId != 30 && chainId != 31) {
+    debug("\n  Deploying yVaultPrizePoolBuilder...")
+    yVaultPrizePoolBuilderResult = await deploy("yVaultPrizePoolBuilder", {
+      args: [
+        reserveRegistryResult.address,
+        trustedForwarder,
+        yVaultPrizePoolProxyFactoryResult.address,
+        singleRandomWinnerBuilderResult.address
+      ],
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+  }
+
+  let stakePrizePoolBuilderResult
+  if (chainId != 30 && chainId != 31) {
+    debug("\n  Deploying StakePrizePoolBuilder...")
+    stakePrizePoolBuilderResult = await deploy("StakePrizePoolBuilder", {
+      args: [
+        reserveRegistryResult.address,
+        trustedForwarder,
+        stakePrizePoolProxyFactoryResult.address,
+        singleRandomWinnerBuilderResult.address
+      ],
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+  }
 
   // Display Contract Addresses
   debug("\n  Contract Deployments Complete!\n")
@@ -295,11 +327,10 @@ module.exports = async (buidler) => {
   debug("  - ControlledTokenBuilder:         ", controlledTokenBuilderResult.address)
   debug("  - SingleRandomWinnerBuilder:      ", singleRandomWinnerBuilderResult.address)
   debug("  - CompoundPrizePoolBuilder:       ", compoundPrizePoolBuilderResult.address)
-  debug("  - yVaultPrizePoolBuilder:         ", yVaultPrizePoolBuilderResult.address)
-  debug("  - StakePrizePoolBuilder:          ", stakePrizePoolBuilderResult.address)
-  if (permitAndDepositDaiResult) {
+  if (chainId != 30 && chainId != 31) {
+    debug("  - yVaultPrizePoolBuilder:         ", yVaultPrizePoolBuilderResult.address)
+    debug("  - StakePrizePoolBuilder:          ", stakePrizePoolBuilderResult.address)
     debug("  - PermitAndDepositDai:            ", permitAndDepositDaiResult.address)
   }
-
   debug("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 };

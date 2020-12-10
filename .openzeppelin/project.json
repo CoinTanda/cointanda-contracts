@@ -9,8 +9,8 @@
     "CounterfactualActionFactory": "CounterfactualActionFactory"
   },
   "dependencies": {},
-  "name": "PoolTogether3",
-  "version": "0.3.0",
+  "name": "Coin Tanda",
+  "version": "0.1.0",
   "compiler": {
     "typechain": {
       "enabled": false

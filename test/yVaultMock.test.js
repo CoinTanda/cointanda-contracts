@@ -4,7 +4,7 @@ const ERC20Mintable = require('../build/ERC20Mintable.json')
 
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 
 const toWei = ethers.utils.parseEther
 

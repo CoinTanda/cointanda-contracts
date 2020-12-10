@@ -2,7 +2,7 @@ const { deployContract } = require('ethereum-waffle')
 const RelayRecipient = require('../build/RelayRecipient.json')
 
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { AddressZero } = require('ethers').constants
 
 const debug = require('debug')('ptv3:RelayRecipient.test')

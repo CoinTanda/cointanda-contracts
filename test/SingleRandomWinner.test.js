@@ -1,7 +1,7 @@
 const { deployContract } = require('ethereum-waffle')
 const { deployMockContract } = require('./helpers/deployMockContract')
 const { call } = require('./helpers/call')
-const { deploy1820 } = require('deploy-eip-1820')
+const { deploy1820 } = require('@thinkanddev/deploy-eip-1820-rsk')
 const TokenListenerInterface = require('../build/TokenListenerInterface.json')
 const SingleRandomWinnerHarness = require('../build/SingleRandomWinnerHarness.json')
 const PrizePool = require('../build/PrizePool.json')
@@ -12,8 +12,10 @@ const ControlledToken = require('../build/ControlledToken.json')
 const Ticket = require('../build/Ticket.json')
 
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
-const { AddressZero, Zero, One } = require('ethers').constants
+const buidler = require('./helpers/buidler')
+const { BigNumber } = require('ethers')
+const { revertedWith } = require('./helpers/revertedWith')
+const { AddressZero, Zero } = require('ethers').constants
 
 
 const now = () => (new Date()).getTime() / 1000 | 0
@@ -117,19 +119,19 @@ describe('SingleRandomWinner', function() {
       debug('testing initialization of secondary prizeStrategy...')
 
       initArgs = _initArgs.slice(); initArgs[2] = 0
-      await expect(prizeStrategy2.initialize(...initArgs)).to.be.revertedWith('PeriodicPrizeStrategy/prize-period-greater-than-zero')
+      await revertedWith(prizeStrategy2.callStatic.initialize(...initArgs), 'PeriodicPrizeStrategy/prize-period-greater-than-zero')
       initArgs = _initArgs.slice(); initArgs[3] = AddressZero
-      await expect(prizeStrategy2.initialize(...initArgs)).to.be.revertedWith('PeriodicPrizeStrategy/prize-pool-not-zero')
+      await revertedWith(prizeStrategy2.callStatic.initialize(...initArgs), 'PeriodicPrizeStrategy/prize-pool-not-zero')
       initArgs = _initArgs.slice(); initArgs[4] = AddressZero
-      await expect(prizeStrategy2.initialize(...initArgs)).to.be.revertedWith('PeriodicPrizeStrategy/ticket-not-zero')
+      await revertedWith(prizeStrategy2.callStatic.initialize(...initArgs), 'PeriodicPrizeStrategy/ticket-not-zero')
       initArgs = _initArgs.slice(); initArgs[5] = AddressZero
-      await expect(prizeStrategy2.initialize(...initArgs)).to.be.revertedWith('PeriodicPrizeStrategy/sponsorship-not-zero')
+      await revertedWith(prizeStrategy2.callStatic.initialize(...initArgs), 'PeriodicPrizeStrategy/sponsorship-not-zero')
       initArgs = _initArgs.slice(); initArgs[6] = AddressZero
-      await expect(prizeStrategy2.initialize(...initArgs)).to.be.revertedWith('PeriodicPrizeStrategy/rng-not-zero')
+      await revertedWith(prizeStrategy2.callStatic.initialize(...initArgs), 'PeriodicPrizeStrategy/rng-not-zero')
 
       initArgs = _initArgs.slice()
       await prizePool.mock.canAwardExternal.withArgs(SENTINEL).returns(false)
-      await expect(prizeStrategy2.initialize(...initArgs)).to.be.revertedWith('PeriodicPrizeStrategy/cannot-award-external')
+      await revertedWith(prizeStrategy2.callStatic.initialize(...initArgs), 'PeriodicPrizeStrategy/cannot-award-external')
     })
 
     it('should disallow unapproved external prize tokens', async () => {
@@ -149,8 +151,7 @@ describe('SingleRandomWinner', function() {
 
       debug('initializing secondary prizeStrategy...')
       await prizePool.mock.canAwardExternal.withArgs(SENTINEL).returns(false)
-      await expect(prizeStrategy2.initialize(...initArgs))
-        .to.be.revertedWith('PeriodicPrizeStrategy/cannot-award-external')
+      await revertedWith(prizeStrategy2.callStatic.initialize(...initArgs), 'PeriodicPrizeStrategy/cannot-award-external')
     })
   })
 
@@ -202,7 +203,7 @@ describe('SingleRandomWinner', function() {
 
     it('should not allow anyone but the owner to change', async () => {
       prizeStrategy2 = prizeStrategy.connect(wallet2)
-      await expect(prizeStrategy2.setRngService(token.address)).to.be.revertedWith('Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy2.callStatic.setRngService(token.address), 'Ownable: caller is not the owner')
     })
 
     it('should not be called if an rng request is in flight', async () => {
@@ -211,8 +212,7 @@ describe('SingleRandomWinner', function() {
       await prizeStrategy.setCurrentTime(await prizeStrategy.prizePeriodEndAt());
       await prizeStrategy.startAward();
 
-      await expect(prizeStrategy.setRngService(token.address))
-        .to.be.revertedWith('PeriodicPrizeStrategy/rng-in-flight');
+      await revertedWith(prizeStrategy.callStatic.setRngService(token.address), 'PeriodicPrizeStrategy/rng-in-flight');
     });
   })
 
@@ -260,16 +260,15 @@ describe('SingleRandomWinner', function() {
       await prizeStrategy.setCurrentTime(await prizeStrategy.prizePeriodEndAt());
       await prizeStrategy.startAward();
 
-      await expect(
-        prizePool.call(
+      await revertedWith(
+        prizePool.staticcall(
           prizeStrategy,
           'beforeTokenTransfer(address,address,uint256,address)',
           wallet._address,
           wallet._address,
           toWei('10'),
           ticket.address
-        ))
-        .to.be.revertedWith('PeriodicPrizeStrategy/rng-in-flight')
+        ), 'PeriodicPrizeStrategy/rng-in-flight')
     })
   })
 
@@ -292,8 +291,7 @@ describe('SingleRandomWinner', function() {
 
     it('should disallow unapproved external ERC20 prize tokens', async () => {
       await prizePool.mock.canAwardExternal.withArgs(invalidExternalToken).returns(false)
-      await expect(prizeStrategy.addExternalErc20Award(invalidExternalToken))
-        .to.be.revertedWith('PeriodicPrizeStrategy/cannot-award-external')
+      await revertedWith(prizeStrategy.callStatic.addExternalErc20Award(invalidExternalToken), 'PeriodicPrizeStrategy/cannot-award-external')
     })
   })
 
@@ -304,12 +302,10 @@ describe('SingleRandomWinner', function() {
         .withArgs(externalERC20Award.address)
     })
     it('should revert when removing non-existant external ERC20 tokens from the prize', async () => {
-      await expect(prizeStrategy.removeExternalErc20Award(invalidExternalToken, SENTINEL))
-        .to.be.revertedWith('Invalid prevAddress')
+      await revertedWith(prizeStrategy.callStatic.removeExternalErc20Award(invalidExternalToken, SENTINEL), 'Invalid prevAddress')
     })
     it('should not allow anyone else to remove external ERC20 tokens from the prize', async () => {
-      await expect(prizeStrategy.connect(wallet2).removeExternalErc20Award(externalERC20Award.address, SENTINEL))
-        .to.be.revertedWith('Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).callStatic.removeExternalErc20Award(externalERC20Award.address, SENTINEL), 'Ownable: caller is not the owner')
     })
   })
 
@@ -322,7 +318,7 @@ describe('SingleRandomWinner', function() {
         .to.deep.equal([externalERC721Award.address])
 
       expect(await prizeStrategy.connect(wallet2).getExternalErc721AwardTokenIds(externalERC721Award.address))
-        .to.deep.equal([One])
+        .to.deep.equal([BigNumber.from(1)])
     })
   })
 
@@ -336,14 +332,12 @@ describe('SingleRandomWinner', function() {
 
     it('should disallow unapproved external ERC721 prize tokens', async () => {
       await prizePool.mock.canAwardExternal.withArgs(invalidExternalToken).returns(false)
-      await expect(prizeStrategy.addExternalErc721Award(invalidExternalToken, [1]))
-        .to.be.revertedWith('PeriodicPrizeStrategy/cannot-award-external')
+      await revertedWith(prizeStrategy.callStatic.addExternalErc721Award(invalidExternalToken, [1]), 'PeriodicPrizeStrategy/cannot-award-external')
     })
 
     it('should disallow ERC721 tokens that are not held by the Prize Pool', async () => {
       await externalERC721Award.mock.ownerOf.withArgs(1).returns(wallet._address)
-      await expect(prizeStrategy.addExternalErc721Award(externalERC721Award.address, [1]))
-        .to.be.revertedWith('PeriodicPrizeStrategy/unavailable-token')
+      await revertedWith(prizeStrategy.callStatic.addExternalErc721Award(externalERC721Award.address, [1]), 'PeriodicPrizeStrategy/unavailable-token')
     })
   })
 
@@ -356,12 +350,10 @@ describe('SingleRandomWinner', function() {
         .withArgs(externalERC721Award.address)
     })
     it('should revert when removing non-existant external ERC721 tokens from the prize', async () => {
-      await expect(prizeStrategy.removeExternalErc721Award(invalidExternalToken, SENTINEL))
-        .to.be.revertedWith('Invalid prevAddress')
+      await revertedWith(prizeStrategy.callStatic.removeExternalErc721Award(invalidExternalToken, SENTINEL), 'Invalid prevAddress')
     })
     it('should not allow anyone else to remove external ERC721 tokens from the prize', async () => {
-      await expect(prizeStrategy.connect(wallet2).removeExternalErc721Award(externalERC721Award.address, SENTINEL))
-        .to.be.revertedWith('Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).callStatic.removeExternalErc721Award(externalERC721Award.address, SENTINEL), 'Ownable: caller is not the owner')
     })
   })
 
@@ -372,8 +364,7 @@ describe('SingleRandomWinner', function() {
       .to.not.be.revertedWith('Ownable: caller is not the owner')
     })
     it('should not allow arbitrary tokens to be transferred by anyone else', async () => {
-      await expect(prizeStrategy.connect(wallet2).transferExternalERC20(wallet._address, externalERC20Award.address, toWei('10')))
-        .to.be.revertedWith('Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).callStatic.transferExternalERC20(wallet._address, externalERC20Award.address, toWei('10')), 'Ownable: caller is not the owner')
     })
   })
 
@@ -539,14 +530,14 @@ describe('SingleRandomWinner', function() {
     describe('startAward()', () => {
       it('should prevent starting an award', async () => {
         await prizeStrategy2.setCurrentTime(100);
-        await expect(prizeStrategy2.startAward()).to.be.revertedWith('PeriodicPrizeStrategy/prize-period-not-over')
+        await revertedWith(prizeStrategy2.callStatic.startAward(), 'PeriodicPrizeStrategy/prize-period-not-over')
       })
     })
 
     describe('completeAward()', () => {
       it('should prevent completing an award', async () => {
         await prizeStrategy2.setCurrentTime(100);
-        await expect(prizeStrategy2.startAward()).to.be.revertedWith('PeriodicPrizeStrategy/prize-period-not-over')
+        await revertedWith(prizeStrategy2.callStatic.startAward(), 'PeriodicPrizeStrategy/prize-period-not-over')
       })
     })
 

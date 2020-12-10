@@ -1,4 +1,5 @@
 const { PoolEnv } = require('./support/PoolEnv')
+const { revertedWith } = require('../helpers/revertedWith')
 
 describe('Tickets Feature', () => {
 
@@ -39,9 +40,9 @@ describe('Tickets Feature', () => {
     await env.buyTickets({ user: 2, tickets: 100 })
     await env.startAward()
 
-    await env.expectRevertWith(env.buyTickets({ user: 1, tickets: 100 }), "PeriodicPrizeStrategy/rng-in-flight")
+    await revertedWith(env.buyTicketsCallStatic({ user: 1, tickets: 100 }), 'PeriodicPrizeStrategy/rng-in-flight')
 
-    await env.expectRevertWith(env.transferTickets({ user: 2, tickets: 100, to: 3 }), "PeriodicPrizeStrategy/rng-in-flight")
+    await revertedWith(env.transferTicketsCallStatic({ user: 2, tickets: 100, to: 3 }), 'PeriodicPrizeStrategy/rng-in-flight')
 
     await env.completeAward({ token: 0 })
 

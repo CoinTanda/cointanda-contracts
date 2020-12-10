@@ -1,4 +1,4 @@
-const buidler = require("@nomiclabs/buidler");
+const buidler = require('../test/helpers/buidler')
 
 const VALID_CHAIN_IDS = [3, 4, 5, 42]
 
@@ -31,7 +31,13 @@ const getChainName = (chainId) => {
     case 3: return 'ropsten';
     case 4: return 'rinkeby';
     case 5: return 'goerli';
+    case 30: return 'rskmainnet';
+    case 31: return 'rsktestnet';
+    case 33: return 'rskregtest';
     case 42: return 'kovan';
+    case 30: return 'rskmainnet';
+    case 31: return 'rsktestnet';
+    case 1337: return 'localhost';
     case 31337: return 'buidlerEVM';
     default: return 'unknown';
   }
@@ -116,7 +122,7 @@ async function main() {
   // Run with CLI flag --silent to suppress log output
 
   console.log("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-  console.log("PoolTogether Pool Contracts - Testnet Transactions Script")
+  console.log("Coin Tanda Pool Contracts - Testnet Transactions Script")
   console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
   const { getNamedAccounts, getChainId, ethers } = buidler

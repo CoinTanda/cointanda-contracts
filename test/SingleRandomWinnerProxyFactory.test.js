@@ -1,6 +1,6 @@
 const { expect } = require("chai")
 const SingleRandomWinnerProxyFactory = require('../build/SingleRandomWinnerProxyFactory.json')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { deployContract } = require('ethereum-waffle')
 
 let overrides = { gasLimit: 20000000 }

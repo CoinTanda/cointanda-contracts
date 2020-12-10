@@ -3,7 +3,7 @@ const CounterfactualActionFactory = require('../build/CounterfactualActionFactor
 const PrizePool = require('../build/PrizePool.json')
 const IERC20 = require('../build/IERC20.json')
 const { ethers } = require('ethers')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { deployContract, deployMockContract } = require('ethereum-waffle')
 const { AddressZero } = require('ethers').constants
 

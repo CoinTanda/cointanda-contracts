@@ -9,7 +9,8 @@ const IERC721 = require('../build/IERC721.json')
 
 const { ethers } = require('ethers')
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
+const { revertedWith } = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 
@@ -90,7 +91,7 @@ describe('CompoundPrizePool', function() {
 
       await erc20token.mock.approve.withArgs(cToken.address, amount).returns(true)
       await cToken.mock.mint.returns('1')
-      await expect(prizePool.supply(amount)).to.be.revertedWith('CompoundPrizePool/mint-failed')
+      await revertedWith(prizePool.callStatic.supply(amount), 'CompoundPrizePool/mint-failed')
     })
   })
 

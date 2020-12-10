@@ -20,6 +20,7 @@ task(TASK_COMPILE_GET_COMPILER_INPUT).setAction(async (_, __, runSuper) => {
   return input;
 })
 
+const rskAdmin = '0x9C95B0EF2D3E1D9ca479524Ba738C87BE28C1585'
 const testnetAdmin = '0xE0F4217390221aF47855E094F6e112D43C8698fE' // Account 1
 const testnetUser1 = '0xeedDf4937E3A7aBe03E08963C3c20affbD770b51' // Account 3
 const testnetUser2 = '0xcE53382F96FdE0DB592574ed2571B3307dB859Ce' // Account 4
@@ -53,17 +54,20 @@ const config = {
       42: '0x0842Ad6B8cb64364761C7c170D0002CC56b1c498',
       4: '0x956868751Cc565507B3B58E53a6f9f41B56bed74',
       3: '0x25CEd1955423BA34332Ec1B60154967750a0297D',
-      1: '0xa530F85085C6FE2f866E7FdB716849714a89f4CD'
+      1: '0xa530F85085C6FE2f866E7FdB716849714a89f4CD',
+      31: '0x0000000000000000000000000000000000000000'
     },
     rng: {
       42: RNGBlockhashKovan.address,
       4: RNGBlockhashRinkeby.address,
-      3: RNGBlockhashRopsten.address
+      3: RNGBlockhashRopsten.address,
+      31: '0x2ad445b0efcb337db6682f6b904f0263bae85509'
     },
     adminAccount: {
       42: testnetAdmin,
       4: testnetAdmin,
-      3: testnetAdmin
+      3: testnetAdmin,
+      31: rskAdmin
     },
     testnetUser1: {
       default: testnetUser1,

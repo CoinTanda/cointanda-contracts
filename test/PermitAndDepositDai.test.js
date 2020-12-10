@@ -7,6 +7,7 @@ const { deployContract, deployMockContract } = require('ethereum-waffle')
 const { AddressZero } = buidler.ethers.constants
 
 const { signPermit } = require('./helpers/signPermit.js')
+const { revertedWith } = require('./helpers/revertedWith')
 
 const toWei = ethers.utils.parseEther
 
@@ -51,6 +52,38 @@ describe('PermitAndDepositDai', () => {
     )
   }
 
+  async function permitAndDepositToCallStatic({
+    prizePool, fromWallet, to, amount
+  }) {
+    if (!fromWallet) {
+      fromWallet = wallet
+    }
+    const expiry = (new Date().getTime())
+    const nonce = 0
+    const allowed = true
+    let permit = await signPermit(
+      wallet,
+      {
+        name: "Dai Stablecoin",
+        version: "1",
+        chainId,
+        verifyingContract: dai.address,
+      },
+      {
+        holder: wallet._address,
+        spender: permitAndDepositDai.address,
+        nonce,
+        expiry,
+        allowed
+      }
+    )
+    let { v, r, s } = ethers.utils.splitSignature(permit.sig)
+    return permitAndDepositDai.connect(fromWallet).callStatic.permitAndDepositTo(
+      dai.address, wallet._address, nonce, expiry, allowed, v, r, s,
+      prizePool, to, amount, AddressZero, AddressZero
+    )
+  }
+
   beforeEach(async () => {
     [wallet, wallet2, wallet3] = await buidler.ethers.getSigners()
     provider = buidler.ethers.provider
@@ -88,14 +121,14 @@ describe('PermitAndDepositDai', () => {
       
       await prizePool.mock.depositTo.withArgs(wallet2._address, toWei('100'), AddressZero, AddressZero).returns()
       
-      await expect(
-        permitAndDepositTo({
+      await revertedWith(
+        permitAndDepositToCallStatic({
           prizePool: prizePool.address,
           to: wallet2._address,
           fromWallet: wallet2,
           amount: toWei('100')
-        })
-      ).to.be.revertedWith('PermitAndDepositDai/only-signer')
+        }),
+      'PermitAndDepositDai/only-signer')
     })
   })
 

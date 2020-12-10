@@ -4,7 +4,7 @@ const TokenControllerInterface = require('../build/TokenControllerInterface.json
 const Ticket = require('../build/Ticket.json')
 
 const { expect } = require('chai')
-const buidler = require('@nomiclabs/buidler')
+const buidler = require('./helpers/buidler')
 const { AddressZero } = require('ethers').constants
 
 const debug = require('debug')('ptv3:Ticket.test')

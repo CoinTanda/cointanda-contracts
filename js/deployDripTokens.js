@@ -1,4 +1,4 @@
-const buidler = require("@nomiclabs/buidler");
+const buidler = require('../test/helpers/buidler')
 
 const ERC20Mintable = require('../build/ERC20Mintable.json')
 const CompoundPrizePool = require('../build/CompoundPrizePool.json')
@@ -28,6 +28,9 @@ const getChainName = (chainId) => {
     case 4: return 'rinkeby';
     case 5: return 'goerli';
     case 42: return 'kovan';
+    case 30: return 'rskmainnet';
+    case 31: return 'rsktestnet';
+    case 1337: return 'localhost';
     case 31337: return 'buidlerEVM';
     default: return 'unknown';
   }
@@ -37,7 +40,7 @@ async function main() {
   // Run with CLI flag --silent to suppress log output
 
   console.log("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-  console.log("PoolTogether Pool Contracts - Drip Tokens Script")
+  console.log("Coin Tanda Pool Contracts - Drip Tokens Script")
   console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
   const { getNamedAccounts, deployments, getChainId, ethers } = buidler
