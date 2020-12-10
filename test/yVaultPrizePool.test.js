@@ -84,7 +84,7 @@ describe('yVaultPrizePool', function() {
     })
 
     it('should not allow anyone but the owner to set the reserve rate mantissa', async () => {
-      await revertedWith(prizePool.connect(wallet2).setReserveRateMantissa(toWei('0.1')), 'Ownable: caller is not the owner')
+      await revertedWith(prizePool.connect(wallet2).callStatic.setReserveRateMantissa(toWei('0.1')), 'Ownable: caller is not the owner')
     })
   })
 

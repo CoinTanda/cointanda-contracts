@@ -166,7 +166,7 @@ describe('PrizePool', function() {
         // await revertedWith(prizePool2.callStatic.initializeAll(...initArgs), 'PrizePool/forwarder-not-zero')
 
         initArgs = _initArgs.slice(); initArgs[1] = AddressZero
-        await revertedWith(prizePool2.initializeAll(...initArgs), 'PrizePool/reserveRegistry-not-zero')
+        await revertedWith(prizePool2.callStatic.initializeAll(...initArgs), 'PrizePool/reserveRegistry-not-zero')
 
         initArgs = _initArgs.slice()
         await ticket.mock.controller.returns(AddressZero)
@@ -865,7 +865,7 @@ describe('PrizePool', function() {
     it('should only allow the prizeStrategy to award external ERC20s', async () => {
       await yieldSourceStub.mock.canAwardExternal.withArgs(erc20token.address).returns(true)
       let prizePool2 = prizePool.connect(wallet2)
-      await revertedWith(prizePool2.transferExternalERC20(wallet._address, FORWARDER, toWei('10')), 'PrizePool/only-prizeStrategy')
+      await revertedWith(prizePool2.callStatic.transferExternalERC20(wallet._address, FORWARDER, toWei('10')), 'PrizePool/only-prizeStrategy')
     })
 
     it('should allow arbitrary tokens to be transferred', async () => {
@@ -900,7 +900,7 @@ describe('PrizePool', function() {
     it('should only allow the prizeStrategy to award external ERC721s', async () => {
       await yieldSourceStub.mock.canAwardExternal.withArgs(erc721token.address).returns(true)
       let prizePool2 = prizePool.connect(wallet2)
-      await revertedWith(prizePool2.awardExternalERC721(wallet._address, erc721token.address, [NFT_TOKEN_ID]), 'PrizePool/only-prizeStrategy')
+      await revertedWith(prizePool2.callStatic.awardExternalERC721(wallet._address, erc721token.address, [NFT_TOKEN_ID]), 'PrizePool/only-prizeStrategy')
     })
 
     it('should allow arbitrary tokens to be transferred', async () => {

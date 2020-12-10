@@ -364,7 +364,7 @@ describe('SingleRandomWinner', function() {
       .to.not.be.revertedWith('Ownable: caller is not the owner')
     })
     it('should not allow arbitrary tokens to be transferred by anyone else', async () => {
-      await revertedWith(prizeStrategy.connect(wallet2).transferExternalERC20(wallet._address, externalERC20Award.address, toWei('10')), 'Ownable: caller is not the owner')
+      await revertedWith(prizeStrategy.connect(wallet2).callStatic.transferExternalERC20(wallet._address, externalERC20Award.address, toWei('10')), 'Ownable: caller is not the owner')
     })
   })
 

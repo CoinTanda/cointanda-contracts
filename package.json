@@ -1,7 +1,7 @@
 {
   "name": "@cointanda/cointanda-contracts",
   "version": "3.0.1",
-  "description": "PoolManager Prize Linked Savings Account Pool Smart Contracts",
+  "description": "CoinTanda Prize Linked Savings Account Pool Smart Contracts",
   "main": "index.js",
   "bin": {
     "pt-cli": "./scripts/cli.js"
@@ -61,8 +61,7 @@
     "shelljs": "0.8.3",
     "solc": "0.6.4",
     "solhint": "3.0.0",
-    "solidity-coverage": "0.7.4",
-    "truffle-extract": "pooltogether/truffle-extract"
+    "solidity-coverage": "0.7.4"
   },
   "files": [
     "LICENSE",

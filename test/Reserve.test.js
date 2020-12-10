@@ -35,13 +35,13 @@ describe('Reserve', () => {
     })
 
     it('should not be callable by anyone else', async () => {
-      await revertedWith(reserve.connect(wallet2).setRateMantissa('1000'), "Ownable: caller is not the owner")
+      await revertedWith(reserve.connect(wallet2).callStatic.setRateMantissa('1000'), "Ownable: caller is not the owner")
     })
   })
 
   describe('withdrawReserve', () => {
     it('should only be callable by the owner', async () => {
-      await revertedWith(reserve.connect(wallet2).withdrawReserve(wallet._address, wallet._address), "Ownable: caller is not the owner")
+      await revertedWith(reserve.connect(wallet2).callStatic.withdrawReserve(wallet._address, wallet._address), "Ownable: caller is not the owner")
     })
 
     it('should be callable by the owner', async () => {
