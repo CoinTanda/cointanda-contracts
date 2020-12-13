@@ -790,8 +790,6 @@ library Address {
 
 // Dependency file: @pooltogether/pooltogether-rng-contracts/contracts/RNGInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0;
 
 /// @title Random Number Generator Interface
@@ -840,7 +838,6 @@ interface RNGInterface {
 
 // Dependency file: contracts/token/TokenListenerInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
@@ -863,7 +860,6 @@ interface TokenListenerInterface {
 
 // Dependency file: contracts/external/pooltogether/FixedPoint.sol
 
-// SPDX-License-Identifier: GPL-3.0
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
@@ -924,8 +920,6 @@ library FixedPoint {
 
 
 // Dependency file: contracts/token/TokenControllerInterface.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
@@ -1267,7 +1261,6 @@ contract ERC20UpgradeSafe is Initializable, ContextUpgradeSafe, IERC20 {
 
 // Dependency file: @opengsn/gsn/contracts/interfaces/IRelayRecipient.sol
 
-// SPDX-License-Identifier:MIT
 // pragma solidity ^0.6.2;
 
 /**
@@ -1308,7 +1301,6 @@ abstract contract IRelayRecipient {
 
 // Dependency file: @opengsn/gsn/contracts/BaseRelayRecipient.sol
 
-// SPDX-License-Identifier:MIT
 // solhint-disable no-inline-assembly
 // pragma solidity ^0.6.2;
 
@@ -1379,8 +1371,6 @@ abstract contract BaseRelayRecipient is IRelayRecipient {
 
 // Dependency file: contracts/utils/RelayRecipient.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@opengsn/gsn/contracts/BaseRelayRecipient.sol";
@@ -1393,8 +1383,6 @@ contract RelayRecipient is BaseRelayRecipient {
 
 
 // Dependency file: contracts/token/ControlledToken.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1505,8 +1493,6 @@ contract ControlledToken is RelayRecipient, ERC20UpgradeSafe {
 
 
 // Dependency file: contracts/token/TicketInterface.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
@@ -1682,8 +1668,6 @@ library SafeERC20 {
 
 // Dependency file: contracts/registry/RegistryInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.5.0 <0.7.0;
 
 /// @title Interface that allows a user to draw an address using an index
@@ -1694,8 +1678,6 @@ interface RegistryInterface {
 
 // Dependency file: contracts/reserve/ReserveInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.5.0 <0.7.0;
 
 /// @title Interface that allows a user to draw an address using an index
@@ -1705,8 +1687,6 @@ interface ReserveInterface {
 
 
 // Dependency file: contracts/prize-pool/YieldSource.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1742,8 +1722,6 @@ abstract contract YieldSource {
 
 
 // Dependency file: contracts/utils/MappedSinglyLinkedList.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1849,8 +1827,6 @@ library MappedSinglyLinkedList {
 
 
 // Dependency file: contracts/prize-pool/PrizePoolInterface.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -2098,7 +2074,6 @@ interface PrizePoolInterface {
 
 // Dependency file: contracts/prize-pool/PrizePool.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -3249,8 +3224,6 @@ library Constants {
 
 // Dependency file: contracts/prize-strategy/PeriodicPrizeStrategy.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
@@ -3812,8 +3785,6 @@ abstract contract PeriodicPrizeStrategy is Initializable,
 
 // Dependency file: contracts/prize-strategy/single-random-winner/SingleRandomWinner.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "contracts/prize-strategy/PeriodicPrizeStrategy.sol";
@@ -3833,7 +3804,6 @@ contract SingleRandomWinner is PeriodicPrizeStrategy {
 
 // Dependency file: contracts/external/openzeppelin/ProxyFactory.sol
 
-// SPDX-License-Identifier: GPL-3.0
 // pragma solidity >=0.6.0 <0.7.0;
 
 // solium-disable security/no-inline-assembly

@@ -50,8 +50,6 @@ interface RNGInterface {
 
 // Dependency file: contracts/token/TokenListenerInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.5.0 <0.7.0;
 
 /// @title An interface that allows a contract to listen to token mint, transfer and burn events.
@@ -912,7 +910,6 @@ library SafeERC20 {
 
 // Dependency file: contracts/external/pooltogether/FixedPoint.sol
 
-// SPDX-License-Identifier: GPL-3.0
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
@@ -974,7 +971,6 @@ library FixedPoint {
 
 // Dependency file: contracts/registry/RegistryInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
@@ -986,7 +982,6 @@ interface RegistryInterface {
 
 // Dependency file: contracts/reserve/ReserveInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
@@ -998,7 +993,6 @@ interface ReserveInterface {
 
 // Dependency file: contracts/prize-pool/YieldSource.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1357,7 +1351,6 @@ contract ERC20UpgradeSafe is Initializable, ContextUpgradeSafe, IERC20 {
 
 // Dependency file: @opengsn/gsn/contracts/interfaces/IRelayRecipient.sol
 
-// SPDX-License-Identifier:MIT
 // pragma solidity ^0.6.2;
 
 /**
@@ -1398,7 +1391,6 @@ abstract contract IRelayRecipient {
 
 // Dependency file: @opengsn/gsn/contracts/BaseRelayRecipient.sol
 
-// SPDX-License-Identifier:MIT
 // solhint-disable no-inline-assembly
 // pragma solidity ^0.6.2;
 
@@ -1469,7 +1461,6 @@ abstract contract BaseRelayRecipient is IRelayRecipient {
 
 // Dependency file: contracts/utils/RelayRecipient.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1484,7 +1475,6 @@ contract RelayRecipient is BaseRelayRecipient {
 
 // Dependency file: contracts/token/TokenControllerInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
@@ -1504,7 +1494,6 @@ interface TokenControllerInterface {
 
 // Dependency file: contracts/token/ControlledToken.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1616,8 +1605,6 @@ contract ControlledToken is RelayRecipient, ERC20UpgradeSafe {
 
 // Dependency file: contracts/utils/MappedSinglyLinkedList.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 /// @notice An efficient implementation of a singly linked list of addresses
@@ -1722,8 +1709,6 @@ library MappedSinglyLinkedList {
 
 
 // Dependency file: contracts/prize-pool/PrizePoolInterface.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1971,7 +1956,6 @@ interface PrizePoolInterface {
 
 // Dependency file: contracts/prize-pool/PrizePool.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -3213,7 +3197,6 @@ interface IERC1820Registry {
 
 // Dependency file: contracts/token/TicketInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
@@ -3249,7 +3232,6 @@ library Constants {
 
 // Dependency file: contracts/prize-strategy/PeriodicPrizeStrategy.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -3812,7 +3794,6 @@ abstract contract PeriodicPrizeStrategy is Initializable,
 
 // Dependency file: contracts/prize-strategy/single-random-winner/SingleRandomWinner.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -3833,7 +3814,6 @@ contract SingleRandomWinner is PeriodicPrizeStrategy {
 
 // Dependency file: contracts/external/openzeppelin/ProxyFactory.sol
 
-// SPDX-License-Identifier: GPL-3.0
 // pragma solidity >=0.6.0 <0.7.0;
 
 // solium-disable security/no-inline-assembly
@@ -3865,7 +3845,6 @@ contract ProxyFactory {
 
 // Dependency file: contracts/prize-strategy/single-random-winner/SingleRandomWinnerProxyFactory.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -3887,7 +3866,6 @@ contract SingleRandomWinnerProxyFactory is ProxyFactory {
 
 // Dependency file: contracts/token/ControlledTokenProxyFactory.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -4204,7 +4182,6 @@ library UniformRandomNumber {
 
 // Dependency file: contracts/token/Ticket.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -4289,8 +4266,6 @@ contract Ticket is ControlledToken, TicketInterface {
 
 // Dependency file: contracts/token/TicketProxyFactory.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol";
@@ -4330,7 +4305,6 @@ interface OpenZeppelinProxyFactoryInterface {
 
 // Root file: contracts/builders/SingleRandomWinnerBuilder.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.6.0 <0.7.0;
 pragma experimental ABIEncoderV2;

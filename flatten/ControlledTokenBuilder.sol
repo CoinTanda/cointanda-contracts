@@ -725,7 +725,6 @@ contract ERC20UpgradeSafe is Initializable, ContextUpgradeSafe, IERC20 {
 
 // Dependency file: @opengsn/gsn/contracts/interfaces/IRelayRecipient.sol
 
-// SPDX-License-Identifier:MIT
 // pragma solidity ^0.6.2;
 
 /**
@@ -766,7 +765,6 @@ abstract contract IRelayRecipient {
 
 // Dependency file: @opengsn/gsn/contracts/BaseRelayRecipient.sol
 
-// SPDX-License-Identifier:MIT
 // solhint-disable no-inline-assembly
 // pragma solidity ^0.6.2;
 
@@ -837,7 +835,6 @@ abstract contract BaseRelayRecipient is IRelayRecipient {
 
 // Dependency file: contracts/utils/RelayRecipient.sol
 
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -851,8 +848,6 @@ contract RelayRecipient is BaseRelayRecipient {
 
 
 // Dependency file: contracts/token/TokenControllerInterface.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
@@ -871,8 +866,6 @@ interface TokenControllerInterface {
 
 
 // Dependency file: contracts/token/ControlledToken.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -984,7 +977,6 @@ contract ControlledToken is RelayRecipient, ERC20UpgradeSafe {
 
 // Dependency file: contracts/external/openzeppelin/ProxyFactory.sol
 
-// SPDX-License-Identifier: GPL-3.0
 // pragma solidity >=0.6.0 <0.7.0;
 
 // solium-disable security/no-inline-assembly
@@ -1015,8 +1007,6 @@ contract ProxyFactory {
 
 
 // Dependency file: contracts/token/ControlledTokenProxyFactory.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1333,8 +1323,6 @@ library UniformRandomNumber {
 
 // Dependency file: contracts/token/TicketInterface.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.5.0 <0.7.0;
 
 /// @title Interface that allows a user to draw an address using an index
@@ -1346,8 +1334,6 @@ interface TicketInterface {
 }
 
 // Dependency file: contracts/token/Ticket.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1431,8 +1417,6 @@ contract Ticket is ControlledToken, TicketInterface {
 }
 
 // Dependency file: contracts/token/TicketProxyFactory.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 

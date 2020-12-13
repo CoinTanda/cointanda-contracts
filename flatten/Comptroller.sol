@@ -123,8 +123,6 @@ library SafeCast {
 
 // Dependency file: contracts/utils/UInt256Array.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 library UInt256Array {
@@ -408,8 +406,6 @@ interface IERC20 {
 
 // Dependency file: contracts/utils/MappedSinglyLinkedList.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 /// @notice An efficient implementation of a singly linked list of addresses
@@ -669,8 +665,6 @@ library SafeMath {
 
 // Dependency file: contracts/utils/ExtendedSafeCast.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 library ExtendedSafeCast {
@@ -703,7 +697,6 @@ library ExtendedSafeCast {
 
 // Dependency file: contracts/external/pooltogether/FixedPoint.sol
 
-// SPDX-License-Identifier: GPL-3.0
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
@@ -764,8 +757,6 @@ library FixedPoint {
 
 
 // Dependency file: contracts/drip/BalanceDrip.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -884,8 +875,6 @@ library BalanceDrip {
 
 // Dependency file: contracts/drip/BalanceDripManager.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol";
@@ -996,8 +985,6 @@ library BalanceDripManager {
 
 
 // Dependency file: contracts/drip/VolumeDrip.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.6.0 <0.7.0;
 
@@ -1186,8 +1173,6 @@ library VolumeDrip {
 
 // Dependency file: contracts/drip/VolumeDripManager.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol";
@@ -1289,8 +1274,6 @@ library VolumeDripManager {
 
 // Dependency file: contracts/comptroller/ComptrollerStorage.sol
 
-// SPDX-License-Identifier: GPL-3.0
-
 // pragma solidity >=0.6.0 <0.7.0;
 
 // import "@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
@@ -1309,8 +1292,6 @@ contract ComptrollerStorage is OwnableUpgradeSafe {
 
 
 // Dependency file: contracts/token/TokenListenerInterface.sol
-
-// SPDX-License-Identifier: GPL-3.0
 
 // pragma solidity >=0.5.0 <0.7.0;
 
