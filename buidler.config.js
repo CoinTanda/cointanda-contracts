@@ -38,7 +38,9 @@ const config = {
     evmVersion: "istanbul"
   },
   paths: {
-    artifacts: "./build"
+    artifacts: "./build",
+    deploy: './deploy',
+    deployments: './deployments'
   },
   networks,
   gasReporter: {
