@@ -1,6 +1,7 @@
 const remapping = {
   'Dai': 'ERC20Mintable',
   'cDai': 'CTokenMock',
+  'iDai': 'iTokenMock',
   'yDai': 'yVaultMock'
 }
 

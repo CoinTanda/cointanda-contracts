@@ -46,16 +46,19 @@ async function deployTestPool({
 
   let yVaultBuilderResult = await deployments.get("yVaultPrizePoolBuilder")
   let compoundBuilderResult = await deployments.get("CompoundPrizePoolBuilder")
+  let sovrynBuilderResult = await deployments.get("SovrynPrizePoolBuilder")
   let comptrollerResult = await deployments.get("Comptroller")
   let rngServiceMockResult = await deployments.get("RNGServiceMock")
   let tokenResult = await deployments.get("Dai")
   let cTokenResult = await deployments.get("cDai")
+  let iTokenResult = await deployments.get("iDai")
   let yTokenResult = await deployments.get("yDai")
   let reserveResult = await deployments.get('Reserve')
 
   const reserve = await buidler.ethers.getContractAt('Reserve', reserveResult.address, wallet)
   const token = await buidler.ethers.getContractAt('ERC20Mintable', tokenResult.address, wallet)
   const cToken = await buidler.ethers.getContractAt('CTokenMock', cTokenResult.address, wallet)
+  const iToken = await buidler.ethers.getContractAt('iTokenMock', iTokenResult.address, wallet)
   const yToken = await buidler.ethers.getContractAt('yVaultMock', yTokenResult.address, wallet)
   const comptroller = await buidler.ethers.getContractAt('ComptrollerHarness', comptrollerResult.address, wallet)
 

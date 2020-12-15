@@ -112,6 +112,16 @@ module.exports = async (buidler) => {
       skipIfAlreadyDeployed: true
     })
 
+    await deploy("iDai", {
+      args: [
+        daiResult.address,
+        supplyRate
+      ],
+      contract: 'iTokenMock',
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+
     // Display Contract Addresses
     debug("\n  Local Contract Deployments;\n")
     debug("  - TrustedForwarder: ", trustedForwarder)
@@ -193,6 +203,21 @@ module.exports = async (buidler) => {
     })
   } else {
     compoundPrizePoolProxyFactoryResult = await deploy("CompoundPrizePoolProxyFactory", {
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+  }
+
+  debug("\n  Deploying SovrynPrizePoolProxyFactory...")
+  let sovrynPrizePoolProxyFactoryResult
+  if (isTestEnvironment && !harnessDisabled) {
+    sovrynPrizePoolProxyFactoryResult = await deploy("SovrynPrizePoolProxyFactory", {
+      contract: 'SovrynPrizePoolHarnessProxyFactory',
+      from: deployer,
+      skipIfAlreadyDeployed: true
+    })
+  } else {
+    sovrynPrizePoolProxyFactoryResult = await deploy("SovrynPrizePoolProxyFactory", {
       from: deployer,
       skipIfAlreadyDeployed: true
     })
@@ -285,6 +310,17 @@ module.exports = async (buidler) => {
     skipIfAlreadyDeployed: true
   })
 
+  debug("\n  Deploying SovrynPrizePoolBuilder...")
+  const sovrynPrizePoolBuilderResult = await deploy("SovrynPrizePoolBuilder", {
+    args: [
+      reserveRegistryResult.address,
+      trustedForwarder,
+      sovrynPrizePoolProxyFactoryResult.address,
+      singleRandomWinnerBuilderResult.address
+    ],
+    from: deployer,
+    skipIfAlreadyDeployed: true
+  })
 
   let yVaultPrizePoolBuilderResult
   if (chainId != 30 && chainId != 31) {
@@ -322,11 +358,13 @@ module.exports = async (buidler) => {
   debug("  - Reserve:                        ", reserveAddress)
   debug("  - Comptroller:                    ", comptrollerAddress)
   debug("  - CompoundPrizePoolProxyFactory:  ", compoundPrizePoolProxyFactoryResult.address)
+  debug("  - SoverynPrizePoolProxyFactory:   ", soverynPrizePoolProxyFactoryResult.address)
   debug("  - ControlledTokenProxyFactory:    ", controlledTokenProxyFactoryResult.address)
   debug("  - SingleRandomWinnerProxyFactory: ", singleRandomWinnerProxyFactoryResult.address)
   debug("  - ControlledTokenBuilder:         ", controlledTokenBuilderResult.address)
   debug("  - SingleRandomWinnerBuilder:      ", singleRandomWinnerBuilderResult.address)
   debug("  - CompoundPrizePoolBuilder:       ", compoundPrizePoolBuilderResult.address)
+  debug("  - SovrynPrizePoolBuilder:         ", sovrynPrizePoolBuilderResult.address)
   if (chainId != 30 && chainId != 31) {
     debug("  - yVaultPrizePoolBuilder:         ", yVaultPrizePoolBuilderResult.address)
     debug("  - StakePrizePoolBuilder:          ", stakePrizePoolBuilderResult.address)
