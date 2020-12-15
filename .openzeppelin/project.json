@@ -3,8 +3,10 @@
   "contracts": {
     "RNGServiceMock": "RNGServiceMock",
     "CompoundPrizePoolBuilder": "CompoundPrizePoolBuilder",
+    "SovrynPrizePoolBuilder": "SovrynPrizePoolBuilder",
     "SingleRandomWinnerProxyFactory": "SingleRandomWinnerProxyFactory",
     "CompoundPrizePoolProxyFactory": "CompoundPrizePoolProxyFactory",
+    "SovrynPrizePoolProxyFactory": "SovrynPrizePoolProxyFactory",
     "ControlledTokenProxyFactory": "ControlledTokenProxyFactory",
     "CounterfactualActionFactory": "CounterfactualActionFactory"
   },
