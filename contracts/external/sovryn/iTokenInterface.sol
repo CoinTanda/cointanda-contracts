@@ -14,7 +14,7 @@ interface iTokenInterface is IERC20 {
 
     function totalReservedSupply() external view returns (uint256);
     function checkpointPrice(address _user) external view returns (uint256 price);
-    function borrowInterestRate() external view returns (uint256);
+    function supplyInterestRate() external view returns (uint256);
     function tokenPrice() external returns (uint256);
     function totalAssetSupply() external view returns (uint256);
 }
